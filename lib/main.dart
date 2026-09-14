@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:movies/core/app_routes.dart';
 import 'package:movies/core/app_theme.dart';
-import 'package:movies/features/splash_screen/splash_screen.dart';
-
-import 'core/app_routes.dart';
-import 'features/onboarding_screen/onboarding_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,8 +14,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.appTheme,
+      onGenerateRoute: AppRoutes.onGenerateRoute,
       initialRoute: AppRoutes.splash,
-
     );
   }
 }
