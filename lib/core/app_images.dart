@@ -7,4 +7,5 @@ class AppImages {
   static const String intro4 = 'assets/images/intro_4.png';
   static const String intro5 = 'assets/images/intro_5.png';
   static const String intro6 = 'assets/images/intro_6.png';
+  static const String forgetPassword = 'assets/images/Forgot_password.png';
 }
