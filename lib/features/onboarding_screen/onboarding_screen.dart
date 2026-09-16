@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies/core/app_routes.dart';
 import 'package:movies/features/onboarding_screen/models/onboarding_model.dart';
 import 'package:movies/features/onboarding_screen/widgets/onboarding_page_item.dart';
 
@@ -16,7 +17,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   void _next() {
     if (currentPage == onboardingData.length - 1) {
-      // TODO: Navigate to Login/Home
+      Navigator.pushReplacementNamed(context, AppRoutes.login);
     } else {
       _pageController.nextPage(
         duration: const Duration(milliseconds: 300),

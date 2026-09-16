@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:movies/core/text_styles.dart';
 
 class CustomButton extends StatelessWidget {
@@ -8,6 +9,7 @@ class CustomButton extends StatelessWidget {
   final Color textColor;
   final bool hasBorder;
   final bool isLoading;
+  final String? icon;
 
   const CustomButton({
     super.key,
@@ -17,6 +19,7 @@ class CustomButton extends StatelessWidget {
     required this.textColor,
     this.hasBorder = false,
     this.isLoading = false,
+    this.icon
   });
 
   @override
@@ -38,7 +41,23 @@ class CustomButton extends StatelessWidget {
         ),
         child: isLoading
             ? CircularProgressIndicator(color: textColor)
-            : Text(text, style: TextStyles.title2(textColor)),
+            : Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (icon != null) ...[
+              SvgPicture.asset(
+                icon!,
+                width: 24,
+                height: 24,
+              ),
+              const SizedBox(width: 8),
+            ],
+            Text(
+              text,
+              style: TextStyles.title2(textColor),
+            ),
+          ],
+        ),
       ),
     );
   }
