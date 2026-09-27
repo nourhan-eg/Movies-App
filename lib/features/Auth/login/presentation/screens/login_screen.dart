@@ -107,8 +107,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Text(
                     "OR",
                     style:Theme.of(
-                    context,
-                  ).textTheme.titleSmall?.copyWith(color: AppColors.yellow),
+                      context,
+                    ).textTheme.titleSmall?.copyWith(color: AppColors.yellow),
                   ),
                 ),
 

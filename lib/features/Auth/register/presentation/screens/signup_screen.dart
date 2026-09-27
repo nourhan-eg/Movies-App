@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:movies/core/app_colors.dart';
-import 'package:movies/features/Auth/register/widgets/sign_up_avatars.dart';
 
-import '../../../core/app_icons.dart';
-import '../../../core/app_routes.dart';
-import '../../../core/widgets/custom_button.dart';
-import '../../../core/widgets/custom_text_field.dart';
+import '../../../../../core/app_icons.dart';
+import '../../../../../core/app_routes.dart';
+import '../../../../../core/widgets/custom_button.dart';
+import '../../../../../core/widgets/custom_text_field.dart';
+import '../widgets/signup_avatar.dart';
 
 class RegisterScreen extends StatefulWidget {
   static const routeName = "register route";

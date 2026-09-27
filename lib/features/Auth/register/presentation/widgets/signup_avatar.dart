@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../core/widgets/app_avatars.dart';
+import '../../../../../core/widgets/app_avatars.dart';
 
 class SignUpAvatars extends StatefulWidget {
   const SignUpAvatars({super.key});
