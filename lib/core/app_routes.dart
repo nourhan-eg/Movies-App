@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movies/features/home/home_screen.dart';
-import '../features/Auth/forget_password/presentation/screens/reset_password.dart';
-import '../features/Auth/login/presentation/screens/login_screen.dart';
-import '../features/Auth/register/presentation/screens/signup_screen.dart';
+import '../features/auth/forget_password/presentation/screens/reset_password.dart';
+import '../features/auth/login/presentation/screens/login_screen.dart';
+import '../features/auth/register/presentation/screens/signup_screen.dart';
 import '../features/onboarding_screen/onboarding_screen.dart';
 import '../features/splash_screen/splash_screen.dart';
 class AppRoutes {
