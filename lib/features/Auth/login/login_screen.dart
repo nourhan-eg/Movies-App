@@ -64,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
             CustomButton(
               text: "Login",
               onPressed: () {
-                Navigator.pushNamed(context, AppRoutes.home);
+                Navigator.pushNamed(context, AppRoutes.main);
               },
               backgroundColor: AppColors.yellow,
               textColor: AppColors.black,
@@ -125,7 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
             CustomButton(
               text: "Login With Google",
               onPressed: () {
-                Navigator.pushNamed(context, AppRoutes.home);
+                Navigator.pushNamed(context, AppRoutes.main);
               },
               backgroundColor: AppColors.yellow,
               textColor: AppColors.black,
