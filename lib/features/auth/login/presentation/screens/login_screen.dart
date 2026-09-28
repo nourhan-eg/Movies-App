@@ -185,7 +185,7 @@ class _LoginScreenState extends State<LoginScreen> {
           },
           listener: (context, state) {
           if (state is LoginSuccess) {
-            Navigator.pushReplacementNamed(context, AppRoutes.home);
+            Navigator.pushReplacementNamed(context, AppRoutes.main);
           } else if (state is LoginFailure) {
             ScaffoldMessenger.of(
               context,

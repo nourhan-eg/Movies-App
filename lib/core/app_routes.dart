@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:movies/features/home/home_screen.dart';
 import '../features/auth/forget_password/presentation/screens/reset_password.dart';
 import '../features/auth/login/presentation/screens/login_screen.dart';
 import '../features/auth/register/presentation/screens/signup_screen.dart';
+import '../features/main_screen/presentation/screens/main_screen.dart';
 import '../features/onboarding_screen/onboarding_screen.dart';
 import '../features/splash_screen/splash_screen.dart';
 class AppRoutes {
@@ -10,7 +10,7 @@ class AppRoutes {
   static const String onboarding = '/onboarding';
   static const String login = '/login';
   static const String register = '/register';
-  static const String home = '/home';
+  static const String main = '/main';
   static const String forgetPassword = '/forget';
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
@@ -31,9 +31,9 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (_) => const RegisterScreen(),
         );
-      case home:
+      case main:
         return MaterialPageRoute(
-          builder: (_) => const HomeScreen(),
+          builder: (_) => const MainScreen(),
         );
       case forgetPassword:
         return MaterialPageRoute(
