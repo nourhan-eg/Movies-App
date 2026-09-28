@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../../core/app_colors.dart';
 import '../../domain/entities/movie_entity.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'movie_card.dart';
 
 

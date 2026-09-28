@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:movies/core/app_routes.dart';
 import 'package:movies/core/app_theme.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'firebase_options.dart';
+import 'core/di/di.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  configureDependencies();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

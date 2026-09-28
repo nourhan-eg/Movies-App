@@ -3,9 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:movies/core/app_colors.dart';
 import '../../../../core/app_icons.dart';
-import '../../home/data/datasources/movie_remote_data_source_impl.dart';
-import '../../home/data/repositories/movie_repository_impl.dart';
-import '../../home/domain/use_cases/get_movies_use_case.dart';
+import '../../../../core/di/di.dart';
 import '../../home/presentation/bloc/home_bloc.dart';
 import '../../home/presentation/bloc/home_event.dart';
 import '../../home/presentation/screens/home_screen.dart';
@@ -23,14 +21,7 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _tabs =  [
     BlocProvider(
-      create: (context) => HomeBloc(
-        GetMoviesUseCase(
-          MovieRepositoryImpl(
-            MovieRemoteDataSourceImpl(),
-          ),
-        ),
-
-  )..add(FetchMoviesEvent()),
+      create: (context) => getIt<HomeBloc>()..add(FetchMoviesEvent()),
         child: HomeScreen()),
     Center(child: Text('Search ',style: TextStyle(color: Colors.white,fontSize: 30),)),
     Center(child: Text('Browse ',style: TextStyle(color: Colors.white,fontSize: 30))),

@@ -25,6 +25,8 @@ dependencies:
   dio: ^5.11.1
   injectable: ^3.0.0
   get_it: ^9.3.0
+  pretty_dio_logger: ^1.4.0
+  cached_network_image: ^4.0.2
 
 dev_dependencies:
   flutter_test:
