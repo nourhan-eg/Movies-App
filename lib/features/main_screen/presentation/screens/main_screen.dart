@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:movies/core/app_colors.dart';
 import '../../../../core/app_icons.dart';
 import '../../../../core/di/di.dart';
+import '../../browse/presentation/screens/browse_screen.dart';
 import '../../home/presentation/bloc/home_bloc.dart';
 import '../../home/presentation/bloc/home_event.dart';
 import '../../home/presentation/screens/home_screen.dart';
@@ -23,8 +24,8 @@ class _MainScreenState extends State<MainScreen> {
     BlocProvider(
       create: (context) => getIt<HomeBloc>()..add(FetchMoviesEvent()),
         child: HomeScreen()),
-    Center(child: Text('Search ',style: TextStyle(color: Colors.white,fontSize: 30),)),
-    Center(child: Text('Browse ',style: TextStyle(color: Colors.white,fontSize: 30))),
+    Center(child: Text('search ',style: TextStyle(color: Colors.white,fontSize: 30))),
+    BrowseScreen(),
     Center(child: Text('Profile ',style: TextStyle(color: Colors.white,fontSize: 30))),
   ];
   final List<String> _icons = const [

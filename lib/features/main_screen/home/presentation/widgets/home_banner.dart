@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../../core/app_colors.dart';
 import '../../domain/entities/movie_entity.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'movie_card.dart';
+import '../../../../../core/widgets/movie_card.dart';
 
 
 class HomeBanner extends StatefulWidget {
@@ -80,9 +79,9 @@ class _HomeBannerState extends State<HomeBanner> {
                     errorBuilder: (_, __, ___) => Container(color: AppColors.dark),
                   ),
                   BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 25.0, sigmaY: 25.0),
+                    filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
                     child: Container(
-                      color: AppColors.black.withValues(alpha: 0.65),
+                      color: AppColors.black.withValues(alpha: 0.5),
                     ),
                   ),
 
@@ -105,94 +104,97 @@ class _HomeBannerState extends State<HomeBanner> {
         ),
 
 
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(height: mediaQuery.padding.top > 0 ? 8.0 : 16.0),
+        Padding(
+          padding: EdgeInsets.symmetric(vertical:screenHeight*0.04 ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(height: mediaQuery.padding.top > 0 ? 8.0 : 16.0),
 
 
-            Text(
-              'Available Now',
-              textAlign: TextAlign.center,
-              style: GoogleFonts.coveredByYourGrace(
-                fontSize: headerFontSize,
-                fontWeight: FontWeight.bold,
-                color: AppColors.white,
-                shadows: [
-                  Shadow(
-                    color: AppColors.black.withValues(alpha: 0.6),
-                    blurRadius: 8.0,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
+              Text(
+                'Available Now',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.coveredByYourGrace(
+                  fontSize: headerFontSize,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.white,
+                  shadows: [
+                    Shadow(
+                      color: AppColors.black.withValues(alpha: 0.6),
+                      blurRadius: 8.0,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
+                ),
               ),
-            ),
 
-            const SizedBox(height: 12.0),
+              const SizedBox(height: 12.0),
 
-            SizedBox(
-              height: carouselHeight,
-              child: PageView.builder(
-                controller: _pageController,
-                itemCount: widget.movies.length,
-                onPageChanged: (index) {
-                  setState(() {
-                    _currentIndex = index;
-                  });
-                },
-                itemBuilder: (context, index) {
-                  final movie = widget.movies[index];
+              SizedBox(
+                height: carouselHeight,
+                child: PageView.builder(
+                  controller: _pageController,
+                  itemCount: widget.movies.length,
+                  onPageChanged: (index) {
+                    setState(() {
+                      _currentIndex = index;
+                    });
+                  },
+                  itemBuilder: (context, index) {
+                    final movie = widget.movies[index];
 
-                  return AnimatedBuilder(
-                    animation: _pageController,
-                    builder: (context, child) {
-                      double value = 1.0;
-                      if (_pageController.position.haveDimensions) {
-                        value = (_pageController.page! - index);
-                        value = (1 - (value.abs() * 0.18)).clamp(0.82, 1.0);
-                      } else {
-                        value = index == _currentIndex ? 1.0 : 0.82;
-                      }
+                    return AnimatedBuilder(
+                      animation: _pageController,
+                      builder: (context, child) {
+                        double value = 1.0;
+                        if (_pageController.position.haveDimensions) {
+                          value = (_pageController.page! - index);
+                          value = (1 - (value.abs() * 0.18)).clamp(0.82, 1.0);
+                        } else {
+                          value = index == _currentIndex ? 1.0 : 0.82;
+                        }
 
-                      return Center(
-                        child: Transform.scale(
-                          scale: value,
-                          child: MovieCard(
-                            movie: movie,
-                            width: cardWidth,
-                            height: cardHeight,
-                            onTap: () => widget.onMovieTap?.call(movie),
+                        return Center(
+                          child: Transform.scale(
+                            scale: value,
+                            child: MovieCard(
+                              movie: movie,
+                              width: cardWidth,
+                              height: cardHeight,
+                              onTap: () => widget.onMovieTap?.call(movie),
+                            ),
                           ),
-                        ),
-                      );
-                    },
-                  );
-                },
+                        );
+                      },
+                    );
+                  },
+                ),
               ),
-            ),
 
-            const SizedBox(height: 12.0),
+              const SizedBox(height: 12.0),
 
-            Text(
-              'Watch Now',
-              textAlign: TextAlign.center,
-              style: GoogleFonts.coveredByYourGrace(
-                fontSize: footerFontSize,
-                fontWeight: FontWeight.bold,
-                color: AppColors.white,
-                shadows: [
-                  Shadow(
-                    color: AppColors.black.withValues(alpha: 0.6),
-                    blurRadius: 8.0,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
+              Text(
+                'Watch Now',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.coveredByYourGrace(
+                  fontSize: footerFontSize,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.white,
+                  shadows: [
+                    Shadow(
+                      color: AppColors.black.withValues(alpha: 0.6),
+                      blurRadius: 8.0,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
+                ),
               ),
-            ),
 
-            const SizedBox(height: 12.0),
-          ],
+              const SizedBox(height: 12.0),
+            ],
+          ),
         ),
       ],
     );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/app_colors.dart';
 import '../../domain/entities/movie_entity.dart';
-import 'movie_card.dart';
+import '../../../../../core/widgets/movie_card.dart';
 
 
 class GenreSection extends StatelessWidget {

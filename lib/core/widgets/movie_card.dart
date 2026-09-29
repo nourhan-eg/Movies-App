@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/app_colors.dart';
-import '../../domain/entities/movie_entity.dart';
+import '../app_colors.dart';
+import '../../features/main_screen/home/domain/entities/movie_entity.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 
