@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:movies/features/Auth/forget_password/forget_password_screen.dart';
-import 'package:movies/features/Auth/login/login_screen.dart';
-import 'package:movies/features/Auth/register/register_screen.dart';
-import 'package:movies/features/home/home_screen.dart';
+import 'package:movies/features/main_screen/browse/presentation/screens/browse_screen.dart';
+import '../features/auth/forget_password/presentation/screens/reset_password.dart';
+import '../features/auth/login/presentation/screens/login_screen.dart';
+import '../features/auth/register/presentation/screens/signup_screen.dart';
+import '../features/main_screen/presentation/screens/main_screen.dart';
 import '../features/onboarding_screen/onboarding_screen.dart';
 import '../features/splash_screen/splash_screen.dart';
 class AppRoutes {
@@ -10,8 +11,9 @@ class AppRoutes {
   static const String onboarding = '/onboarding';
   static const String login = '/login';
   static const String register = '/register';
-  static const String home = '/home';
+  static const String main = '/main';
   static const String forgetPassword = '/forget';
+  static const String browse = '/browse';
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -31,13 +33,17 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (_) => const RegisterScreen(),
         );
-      case home:
+      case main:
         return MaterialPageRoute(
-          builder: (_) => const HomeScreen(),
+          builder: (_) => const MainScreen(),
         );
       case forgetPassword:
         return MaterialPageRoute(
           builder: (_) => const ForgetPasswordScreen(),
+        );
+      case browse:
+        return MaterialPageRoute(
+          builder: (_) => const BrowseScreen(),
         );
 
 

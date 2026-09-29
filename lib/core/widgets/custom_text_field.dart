@@ -29,7 +29,7 @@ class CustomTextField extends StatefulWidget {
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {
-  bool _obscureText = true;
+  late bool _obscureText = widget.obscureText;
 
   @override
   Widget build(BuildContext context) {

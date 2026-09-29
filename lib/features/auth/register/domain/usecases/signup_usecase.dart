@@ -1,0 +1,25 @@
+import 'package:dartz/dartz.dart';
+import 'package:movies/failure.dart';
+import 'package:movies/features/auth/register/domain/repositories/signup_repository.dart';
+
+class SignupUsecase {
+  SignupRepository signupRepository;
+
+  SignupUsecase({required this.signupRepository});
+
+  Future<Either<Failure, void>> call({
+    required String name,
+    required String email,
+    required String phone,
+    required String password,
+    required String rePassword,
+  }) async {
+    return await signupRepository.signUp(
+      name: name,
+      email: email,
+      phone: phone,
+      password: password,
+      rePassword: rePassword,
+    );
+  }
+}

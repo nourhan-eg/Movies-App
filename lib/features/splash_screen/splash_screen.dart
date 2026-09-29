@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:movies/core/app_images.dart';
 import 'package:movies/core/app_routes.dart';
 
@@ -15,7 +16,13 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, AppRoutes.onboarding);
+      if (mounted) {
+        if (FirebaseAuth.instance.currentUser != null) {
+          Navigator.pushReplacementNamed(context, AppRoutes.main);
+        } else {
+          Navigator.pushReplacementNamed(context, AppRoutes.onboarding);
+        }
+      }
     });
   }
 
