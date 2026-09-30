@@ -1,8 +1,10 @@
+import 'package:injectable/injectable.dart';
 import 'package:movies/features/main_screen/home/domain/entities/movie_entity.dart';
 
 import '../../domain/repositories/browse_repository.dart';
 import '../data_sources/browse_remote_data_source.dart';
 
+@Injectable(as: BrowseRepository)
 class BrowseRepositoryImpl implements BrowseRepository{
   final BrowseRemoteDataSource browseRemoteDataSource;
 

@@ -1,17 +1,12 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:movies/core/app_colors.dart';
 import 'package:movies/core/app_icons.dart';
 import 'package:movies/core/app_images.dart';
 import 'package:movies/core/app_routes.dart';
+import 'package:movies/core/di/di.dart';
 import 'package:movies/core/widgets/custom_button.dart';
 import 'package:movies/core/widgets/custom_text_field.dart';
-import 'package:movies/features/auth/login/data/data_sources/login_remote_data_source_impl.dart';
-import 'package:movies/features/auth/login/data/repositories/login_repository_impl.dart';
-import 'package:movies/features/auth/login/domain/usecases/login_with_email_usecase.dart';
-import 'package:movies/features/auth/login/domain/usecases/login_with_google_usecase.dart';
 import 'package:movies/features/auth/login/presentation/bloc/login_bloc.dart';
 import 'package:movies/features/auth/login/presentation/bloc/login_events.dart';
 import 'package:movies/features/auth/login/presentation/bloc/login_states.dart';
@@ -32,22 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) {
-        final repository = LoginRepositoryImpl(
-          loginRemoteDataSource: LoginRemoteDataSourceImpl(
-            firebaseAuth: FirebaseAuth.instance,
-            googleSignIn: GoogleSignIn.instance,
-          ),
-        );
-        return LoginBloc(
-          loginWithEmailUsecase: LoginWithEmailUsecase(
-            loginRepository: repository,
-          ),
-          loginWithGoogleUsecase: LoginWithGoogleUsecase(
-            loginRepository: repository,
-          ),
-        );
-      },
+      create: (context) => getIt<LoginBloc>(),
       child: BlocConsumer<LoginBloc, LoginStates>(
           builder: (BuildContext context, LoginStates state) {
             return Scaffold(

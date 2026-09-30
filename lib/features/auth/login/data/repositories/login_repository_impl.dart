@@ -1,9 +1,11 @@
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 import 'package:movies/features/auth/login/data/data_sources/login_remote_data_source.dart';
 import 'package:movies/features/auth/login/domain/repositories/login_repository.dart';
 
 import '../../../../../failure.dart';
 
+@Injectable(as: LoginRepository)
 class LoginRepositoryImpl implements LoginRepository{
   LoginRemoteDataSource loginRemoteDataSource;
   LoginRepositoryImpl({required this.loginRemoteDataSource});

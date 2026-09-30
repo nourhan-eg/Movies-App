@@ -1,8 +1,10 @@
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 import 'package:movies/failure.dart';
 import 'package:movies/features/auth/forget_password/data/data_sources/forget_password_remote_data_source.dart';
 import 'package:movies/features/auth/forget_password/domain/repositories/forget_password_repository.dart';
 
+@Injectable(as: ForgetPasswordRepository)
 class ForgetPasswordRepositoryImpl implements ForgetPasswordRepository {
   final ForgetPasswordRemoteDataSource forgetPasswordRemoteDataSource;
 

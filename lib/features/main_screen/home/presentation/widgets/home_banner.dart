@@ -76,7 +76,7 @@ class _HomeBannerState extends State<HomeBanner> {
                   Image.network(
                     activeMovie.posterImage,
                     fit: BoxFit.cover,
-                    errorBuilder: (_, __, ___) => Container(color: AppColors.dark),
+                    errorBuilder: (_, _, _) => Container(color: AppColors.dark),
                   ),
                   BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),

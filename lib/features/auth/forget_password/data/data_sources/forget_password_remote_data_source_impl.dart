@@ -1,9 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:movies/failure.dart';
 import 'forget_password_remote_data_source.dart';
 
+@Injectable(as: ForgetPasswordRemoteDataSource)
 class ForgetPasswordRemoteDataSourceImpl implements ForgetPasswordRemoteDataSource {
   final FirebaseAuth firebaseAuth;
 

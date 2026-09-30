@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies/core/di/di.dart';
 import 'package:movies/core/widgets/movie_card.dart';
 
-import '../../../../../core/api/api_manager.dart';
-import '../../data/data_sources/browse_remote_data_source_impl.dart';
-import '../../data/repositories/browse_repository_impl.dart';
-import '../../domain/usecases/get_movies_by_genre_usecase.dart';
 import '../bloc/browse_bloc.dart';
 import '../bloc/browse_events.dart';
 import '../bloc/browse_states.dart';
@@ -13,20 +10,13 @@ import '../bloc/browse_states.dart';
 class GenreTab extends StatelessWidget {
   final String genre;
 
-  const GenreTab({required this.genre});
+  const GenreTab({super.key, required this.genre});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-      BrowseBloc(
-        getMoviesByGenreUsecase: GetMoviesByGenreUsecase(
-          BrowseRepositoryImpl(
-            BrowseRemoteDataSourceImpl(ApiManager()),
-          ),
-        ),
-      )
-        ..add(GetMoviesByGenreRequested(genre: genre)),
+          getIt<BrowseBloc>()..add(GetMoviesByGenreRequested(genre: genre)),
       child: BlocConsumer<BrowseBloc, BrowseStates>(
         listener: (context, state) {
           if (state is BrowseFailure) {

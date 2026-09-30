@@ -1,14 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/core/app_colors.dart';
 import 'package:movies/core/app_icons.dart';
 import 'package:movies/core/app_images.dart';
+import 'package:movies/core/di/di.dart';
 import 'package:movies/core/widgets/custom_button.dart';
 import 'package:movies/core/widgets/custom_text_field.dart';
-import 'package:movies/features/auth/forget_password/data/data_sources/forget_password_remote_data_source_impl.dart';
-import 'package:movies/features/auth/forget_password/data/repositories/forget_password_repository_impl.dart';
-import 'package:movies/features/auth/forget_password/domain/usecases/forget_password_usecase.dart';
 import 'package:movies/features/auth/forget_password/presentation/bloc/forget_password_bloc.dart';
 import 'package:movies/features/auth/forget_password/presentation/bloc/forget_password_events.dart';
 import 'package:movies/features/auth/forget_password/presentation/bloc/forget_password_states.dart';
@@ -33,18 +30,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) {
-        final repository = ForgetPasswordRepositoryImpl(
-          forgetPasswordRemoteDataSource: ForgetPasswordRemoteDataSourceImpl(
-            firebaseAuth: FirebaseAuth.instance,
-          ),
-        );
-        return ForgetPasswordBloc(
-          forgetPasswordUsecase: ForgetPasswordUsecase(
-            forgetPasswordRepository: repository,
-          ),
-        );
-      },
+      create: (context) => getIt<ForgetPasswordBloc>(),
       child: BlocConsumer<ForgetPasswordBloc, ForgetPasswordStates>(
         listener: (context, state) {
           if (state is ForgetPasswordSuccess) {

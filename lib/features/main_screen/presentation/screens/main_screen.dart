@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:movies/core/app_colors.dart';
+import 'package:movies/features/main_screen/search/presentation/screens/search_tab.dart';
 import '../../../../core/app_icons.dart';
 import '../../../../core/di/di.dart';
 import '../../browse/presentation/screens/browse_screen.dart';
@@ -24,7 +25,7 @@ class _MainScreenState extends State<MainScreen> {
     BlocProvider(
       create: (context) => getIt<HomeBloc>()..add(FetchMoviesEvent()),
         child: HomeScreen()),
-    Center(child: Text('search ',style: TextStyle(color: Colors.white,fontSize: 30))),
+    SearchTab(),
     BrowseScreen(),
     Center(child: Text('Profile ',style: TextStyle(color: Colors.white,fontSize: 30))),
   ];

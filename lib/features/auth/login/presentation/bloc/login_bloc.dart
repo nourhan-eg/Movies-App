@@ -1,9 +1,11 @@
 import 'package:bloc/bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:movies/features/auth/login/domain/usecases/login_with_email_usecase.dart';
 import 'package:movies/features/auth/login/domain/usecases/login_with_google_usecase.dart';
 import 'package:movies/features/auth/login/presentation/bloc/login_events.dart';
 import 'package:movies/features/auth/login/presentation/bloc/login_states.dart';
 
+@injectable
 class LoginBloc extends Bloc<LoginEvents, LoginStates> {
   final LoginWithEmailUsecase loginWithEmailUsecase;
   final LoginWithGoogleUsecase loginWithGoogleUsecase;

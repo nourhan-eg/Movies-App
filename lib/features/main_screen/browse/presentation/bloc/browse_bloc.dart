@@ -1,8 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import '../../domain/usecases/get_movies_by_genre_usecase.dart';
 import 'browse_events.dart';
 import 'browse_states.dart';
 
+@injectable
 class BrowseBloc extends Bloc<BrowseEvents, BrowseStates> {
   final GetMoviesByGenreUsecase getMoviesByGenreUsecase;
 

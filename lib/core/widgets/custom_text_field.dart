@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:movies/core/text_styles.dart';
 
 class CustomTextField extends StatefulWidget {
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final String hintText;
   final String prefixIcon;
   final bool obscureText;
@@ -11,10 +11,11 @@ class CustomTextField extends StatefulWidget {
   final TextInputType keyboardType;
   final String? Function(String?)? validator;
   final Widget? suffixIcon;
+  final ValueChanged<String>? onChanged;
 
   const CustomTextField({
     super.key,
-    required this.controller,
+    this.controller,
     required this.hintText,
     required this.prefixIcon,
     this.obscureText = false,
@@ -22,6 +23,7 @@ class CustomTextField extends StatefulWidget {
     this.validator,
     this.isPassword = false,
     this.suffixIcon,
+    this.onChanged
   });
 
   @override
@@ -39,6 +41,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       keyboardType: widget.keyboardType,
       validator: widget.validator,
       style: TextStyles.title2(Colors.white),
+      onChanged: widget.onChanged,
       decoration: InputDecoration(
         hintText: widget.hintText,
         hintStyle: TextStyles.title2(Colors.grey),

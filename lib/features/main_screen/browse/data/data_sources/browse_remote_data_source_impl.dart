@@ -1,5 +1,4 @@
-import 'package:dartz/dartz.dart';
-import 'package:movies/failure.dart';
+import 'package:injectable/injectable.dart';
 import 'package:movies/features/main_screen/browse/data/data_sources/browse_remote_data_source.dart';
 import 'package:movies/features/main_screen/home/data/models/movie.dart';
 
@@ -7,6 +6,7 @@ import '../../../../../core/api/api_manager.dart';
 import '../../../../../core/constants/api_constants.dart';
 import '../../../home/data/models/movies_response_model.dart';
 
+@Injectable(as: BrowseRemoteDataSource)
 class BrowseRemoteDataSourceImpl implements BrowseRemoteDataSource {
 
   final ApiManager apiManager;
