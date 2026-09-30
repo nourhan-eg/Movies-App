@@ -33,7 +33,7 @@ class OnboardingPageItem extends StatelessWidget {
               end: Alignment.bottomCenter,
               colors: [
                 Colors.transparent,
-                Colors.black.withOpacity(0.85),
+                Colors.black.withValues(alpha: 0.85),
                 Colors.black,
               ],
               stops: const [0.3, 0.6, 1.0],
