@@ -1,0 +1,14 @@
+import 'package:injectable/injectable.dart';
+import 'package:movies/features/main_screen/home/domain/entities/movie_entity.dart';
+import 'package:movies/features/main_screen/profile/domain/repositories/history_repository.dart';
+
+@injectable
+class RemoveFromHistoryUseCase {
+  final HistoryRepository _repository;
+
+  RemoveFromHistoryUseCase(this._repository);
+
+  Future<void> call(MovieEntity movie) async {
+    return await _repository.removeFromHistory(movie);
+  }
+}

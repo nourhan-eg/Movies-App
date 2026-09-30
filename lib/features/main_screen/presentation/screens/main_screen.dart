@@ -7,6 +7,7 @@ import '../../../../core/di/di.dart';
 import '../../home/presentation/bloc/home_bloc.dart';
 import '../../home/presentation/bloc/home_event.dart';
 import '../../home/presentation/screens/home_screen.dart';
+import '../../profile/presentation/screens/profile_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -25,7 +26,7 @@ class _MainScreenState extends State<MainScreen> {
         child: HomeScreen()),
     Center(child: Text('Search ',style: TextStyle(color: Colors.white,fontSize: 30),)),
     Center(child: Text('Browse ',style: TextStyle(color: Colors.white,fontSize: 30))),
-    Center(child: Text('Profile ',style: TextStyle(color: Colors.white,fontSize: 30))),
+    const ProfileScreen(),
   ];
   final List<String> _icons = const [
     AppIcons.homeIcon,

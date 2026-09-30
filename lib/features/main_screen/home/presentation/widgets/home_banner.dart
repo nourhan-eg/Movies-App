@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../../core/app_colors.dart';
 import '../../domain/entities/movie_entity.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'movie_card.dart';
+import '../../../../../core/widgets/movie_card.dart';
 
 
 class HomeBanner extends StatefulWidget {
@@ -80,9 +80,9 @@ class _HomeBannerState extends State<HomeBanner> {
                     errorBuilder: (_, __, ___) => Container(color: AppColors.dark),
                   ),
                   BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 25.0, sigmaY: 25.0),
+                    filter: ImageFilter.blur(sigmaX: 8.0, sigmaY: 8.0),
                     child: Container(
-                      color: AppColors.black.withValues(alpha: 0.65),
+                      color: AppColors.black.withValues(alpha: 0.5),
                     ),
                   ),
 
