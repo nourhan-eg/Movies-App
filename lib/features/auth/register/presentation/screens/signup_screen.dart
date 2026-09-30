@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/core/app_colors.dart';
 import 'package:movies/core/validator.dart';
+import 'package:movies/core/widgets/app_avatars.dart';
 import 'package:movies/features/auth/register/data/data_sources/signup_remote_data_source_impl.dart';
 import 'package:movies/features/auth/register/data/repositories/signup_repository_impl.dart';
 import 'package:movies/features/auth/register/domain/usecases/signup_usecase.dart';
@@ -26,6 +27,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  String _selectedAvatar = AppAvatars.beardMan;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -40,7 +42,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
       create: (context) => SignupBloc(
         signupUsecase: SignupUsecase(
           signupRepository: SignupRepositoryImpl(
-            signupRemoteDataSource: SignupRemoteDataSourceImpl(firebaseAuth: FirebaseAuth.instance),
+            signupRemoteDataSource: SignupRemoteDataSourceImpl(
+              firebaseAuth: FirebaseAuth.instance,
+            ),
           ),
         ),
       ),
@@ -69,7 +73,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 key: _formKey,
                 child: Column(
                   children: [
-                    SignUpAvatars(),
+                    SignUpAvatars(
+                      onAvatarSelected: (path) => setState(() {
+                        _selectedAvatar = path;
+                      }),
+                    ),
                     SizedBox(height: 24),
                     CustomTextField(
                       controller: _nameController,
@@ -129,6 +137,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               phone: _phoneController.text.trim(),
                               password: _passwordController.text,
                               rePassword: _confirmPasswordController.text,
+                              avatar: _selectedAvatar,
                             ),
                           );
                         }
@@ -142,9 +151,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       children: [
                         Text(
                           "Already Have Account ? ",
-                          style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                            color: AppColors.white,
-                          ),
+                          style: Theme.of(context).textTheme.titleSmall
+                              ?.copyWith(color: AppColors.white),
                         ),
                         InkWell(
                           onTap: () {

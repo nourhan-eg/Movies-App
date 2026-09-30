@@ -15,6 +15,7 @@ class SignupRemoteDataSourceImpl implements SignupRemoteDataSource {
     required String phone,
     required String password,
     required String rePassword,
+    required String avatar,
   }) async {
     if (password != rePassword) {
       return Left(ServerFailure('Passwords do not match'));
@@ -25,6 +26,8 @@ class SignupRemoteDataSourceImpl implements SignupRemoteDataSource {
         password: password,
       );
       await credential.user?.updateDisplayName(name);
+      await credential.user?.updatePhotoURL(avatar);
+      await credential.user?.reload();
       return const Right(null);
     } on FirebaseAuthException catch (e) {
       return Left(ServerFailure(e.message ?? 'Sign up failed'));

@@ -13,6 +13,7 @@ class SignupUsecase {
     required String phone,
     required String password,
     required String rePassword,
+    required String avatar,
   }) async {
     return await signupRepository.signUp(
       name: name,
@@ -20,6 +21,7 @@ class SignupUsecase {
       phone: phone,
       password: password,
       rePassword: rePassword,
+      avatar: avatar,
     );
   }
 }
