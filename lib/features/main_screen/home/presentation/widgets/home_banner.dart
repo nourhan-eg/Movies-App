@@ -3,19 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../../core/app_colors.dart';
 import '../../domain/entities/movie_entity.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import '../../../../../core/widgets/movie_card.dart';
-
 
 class HomeBanner extends StatefulWidget {
   final List<MovieEntity> movies;
   final ValueChanged<MovieEntity>? onMovieTap;
 
-  const HomeBanner({
-    super.key,
-    required this.movies,
-    this.onMovieTap,
-  });
+  const HomeBanner({super.key, required this.movies, this.onMovieTap});
 
   @override
   State<HomeBanner> createState() => _HomeBannerState();
@@ -53,8 +47,8 @@ class _HomeBannerState extends State<HomeBanner> {
     final screenWidth = mediaQuery.size.width;
     final screenHeight = mediaQuery.size.height;
 
-    final activeMovie = widget.movies[_currentIndex.clamp(0, widget.movies.length - 1)];
-
+    final activeMovie =
+        widget.movies[_currentIndex.clamp(0, widget.movies.length - 1)];
 
     final carouselHeight = (screenHeight * 0.40).clamp(280.0, 400.0);
     final cardWidth = (screenWidth * 0.55).clamp(180.0, 270.0);
@@ -65,7 +59,6 @@ class _HomeBannerState extends State<HomeBanner> {
 
     return Stack(
       children: [
-
         Positioned.fill(
           child: AnimatedSwitcher(
             duration: const Duration(milliseconds: 500),
@@ -77,7 +70,7 @@ class _HomeBannerState extends State<HomeBanner> {
                   Image.network(
                     activeMovie.posterImage,
                     fit: BoxFit.cover,
-                    errorBuilder: (_, __, ___) => Container(color: AppColors.dark),
+                    errorBuilder: (_, _, _) => Container(color: AppColors.dark),
                   ),
                   BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 8.0, sigmaY: 8.0),
@@ -89,10 +82,7 @@ class _HomeBannerState extends State<HomeBanner> {
                   Container(
                     decoration: const BoxDecoration(
                       gradient: LinearGradient(
-                        colors: [
-                          Colors.transparent,
-                          AppColors.dark,
-                        ],
+                        colors: [Colors.transparent, AppColors.dark],
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                       ),
@@ -104,13 +94,11 @@ class _HomeBannerState extends State<HomeBanner> {
           ),
         ),
 
-
         Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(height: mediaQuery.padding.top > 0 ? 8.0 : 16.0),
-
 
             Text(
               'Available Now',

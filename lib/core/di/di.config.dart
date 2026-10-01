@@ -28,48 +28,49 @@ import '../../features/main_screen/home/domain/use_cases/get_movies_use_case.dar
 import '../../features/main_screen/home/presentation/bloc/home_bloc.dart'
     as _i183;
 import '../../features/main_screen/profile/data/data_sources/history_local_data_source.dart'
-    as _i601;
+    as _i922;
 import '../../features/main_screen/profile/data/data_sources/history_local_data_source_impl.dart'
-    as _i602;
+    as _i1005;
 import '../../features/main_screen/profile/data/data_sources/profile_remote_data_source.dart'
-    as _i701;
+    as _i363;
 import '../../features/main_screen/profile/data/data_sources/profile_remote_data_source_impl.dart'
-    as _i702;
+    as _i840;
 import '../../features/main_screen/profile/data/data_sources/wishlist_remote_data_source.dart'
-    as _i801;
+    as _i214;
 import '../../features/main_screen/profile/data/data_sources/wishlist_remote_data_source_impl.dart'
-    as _i802;
+    as _i520;
 import '../../features/main_screen/profile/data/repositories/history_repository_impl.dart'
-    as _i612;
+    as _i572;
 import '../../features/main_screen/profile/data/repositories/profile_repository_impl.dart'
     as _i712;
 import '../../features/main_screen/profile/data/repositories/wishlist_repository_impl.dart'
-    as _i812;
+    as _i402;
 import '../../features/main_screen/profile/domain/repositories/history_repository.dart'
-    as _i611;
+    as _i1008;
 import '../../features/main_screen/profile/domain/repositories/profile_repository.dart'
-    as _i711;
+    as _i192;
 import '../../features/main_screen/profile/domain/repositories/wishlist_repository.dart'
-    as _i811;
+    as _i134;
 import '../../features/main_screen/profile/domain/use_cases/history_usecases/add_to_history_use_case.dart'
-    as _i621;
+    as _i541;
 import '../../features/main_screen/profile/domain/use_cases/history_usecases/clear_history_use_case.dart'
-    as _i622;
+    as _i245;
 import '../../features/main_screen/profile/domain/use_cases/history_usecases/get_history_use_case.dart'
-    as _i623;
+    as _i256;
 import '../../features/main_screen/profile/domain/use_cases/history_usecases/remove_from_history_use_case.dart'
-    as _i624;
+    as _i923;
 import '../../features/main_screen/profile/domain/use_cases/profile_usecases/get_user_profile_use_case.dart'
-    as _i721;
+    as _i573;
 import '../../features/main_screen/profile/domain/use_cases/profile_usecases/logout_use_case.dart'
-    as _i722;
+    as _i284;
 import '../../features/main_screen/profile/domain/use_cases/wishlist_usecases/add_to_wishlist_use_case.dart'
-    as _i821;
+    as _i478;
 import '../../features/main_screen/profile/domain/use_cases/wishlist_usecases/get_wishlist_use_case.dart'
-    as _i822;
-import '../../features/main_screen/profile/domain/use_cases/wishlist_usecases/remove_to_wishlist_use_case.dart'
-    as _i823;
+    as _i961;
+import '../../features/main_screen/profile/domain/use_cases/wishlist_usecases/remove_from_wishlist_use_case.dart'
+    as _i31;
 import '../api/api_manager.dart' as _i1047;
+import 'firebase_module.dart' as _i616;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -78,18 +79,75 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
-
-    // ── Infrastructure ────────────────────────────────────────────────────────
+    final firebaseModule = _$FirebaseModule();
     gh.singleton<_i1047.ApiManager>(() => _i1047.ApiManager());
-    gh.singleton<_i59.FirebaseAuth>(() => _i59.FirebaseAuth.instance);
-    gh.singleton<_i974.FirebaseFirestore>(() => _i974.FirebaseFirestore.instance);
-
-    // ── Home ──────────────────────────────────────────────────────────────────
+    gh.singleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth);
+    gh.singleton<_i974.FirebaseFirestore>(
+      () => firebaseModule.firebaseFirestore,
+    );
+    gh.factory<_i363.ProfileRemoteDataSource>(
+      () => _i840.ProfileRemoteDataSourceImpl(
+        firebaseAuth: gh<_i59.FirebaseAuth>(),
+      ),
+    );
+    gh.factory<_i192.ProfileRepository>(
+      () => _i712.ProfileRepositoryImpl(
+        remoteDataSource: gh<_i363.ProfileRemoteDataSource>(),
+      ),
+    );
+    gh.factory<_i214.WishlistRemoteDataSource>(
+      () => _i520.WishlistRemoteDataSourceImpl(
+        firebaseAuth: gh<_i59.FirebaseAuth>(),
+        firestore: gh<_i974.FirebaseFirestore>(),
+      ),
+    );
+    gh.factory<_i922.HistoryLocalDataSource>(
+      () => _i1005.HistoryLocalDataSourceImpl(
+        firebaseAuth: gh<_i59.FirebaseAuth>(),
+      ),
+    );
+    gh.factory<_i1008.HistoryRepository>(
+      () => _i572.HistoryRepositoryImpl(
+        localDataSource: gh<_i922.HistoryLocalDataSource>(),
+      ),
+    );
     gh.factory<_i501.MovieRemoteDataSource>(
       () => _i84.MovieRemoteDataSourceImpl(gh<_i1047.ApiManager>()),
     );
+    gh.factory<_i134.WishlistRepository>(
+      () => _i402.WishlistRepositoryImpl(
+        remoteDataSource: gh<_i214.WishlistRemoteDataSource>(),
+      ),
+    );
     gh.factory<_i663.MovieRepository>(
       () => _i455.MovieRepositoryImpl(gh<_i501.MovieRemoteDataSource>()),
+    );
+    gh.factory<_i573.GetUserProfileUseCase>(
+      () => _i573.GetUserProfileUseCase(gh<_i192.ProfileRepository>()),
+    );
+    gh.factory<_i284.LogoutUseCase>(
+      () => _i284.LogoutUseCase(gh<_i192.ProfileRepository>()),
+    );
+    gh.factory<_i541.AddToHistoryUseCase>(
+      () => _i541.AddToHistoryUseCase(gh<_i1008.HistoryRepository>()),
+    );
+    gh.factory<_i245.ClearHistoryUseCase>(
+      () => _i245.ClearHistoryUseCase(gh<_i1008.HistoryRepository>()),
+    );
+    gh.factory<_i256.GetHistoryUseCase>(
+      () => _i256.GetHistoryUseCase(gh<_i1008.HistoryRepository>()),
+    );
+    gh.factory<_i923.RemoveFromHistoryUseCase>(
+      () => _i923.RemoveFromHistoryUseCase(gh<_i1008.HistoryRepository>()),
+    );
+    gh.factory<_i478.AddToWishlistUseCase>(
+      () => _i478.AddToWishlistUseCase(gh<_i134.WishlistRepository>()),
+    );
+    gh.factory<_i961.GetWishlistUseCase>(
+      () => _i961.GetWishlistUseCase(gh<_i134.WishlistRepository>()),
+    );
+    gh.factory<_i31.RemoveToWishlistUseCase>(
+      () => _i31.RemoveToWishlistUseCase(gh<_i134.WishlistRepository>()),
     );
     gh.factory<_i299.GetMoviesUseCase>(
       () => _i299.GetMoviesUseCase(gh<_i663.MovieRepository>()),
@@ -97,71 +155,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i183.HomeBloc>(
       () => _i183.HomeBloc(gh<_i299.GetMoviesUseCase>()),
     );
-
-    // ── Profile — data sources ────────────────────────────────────────────────
-    gh.factory<_i701.ProfileRemoteDataSource>(
-      () => _i702.ProfileRemoteDataSourceImpl(
-        firebaseAuth: gh<_i59.FirebaseAuth>(),
-      ),
-    );
-    gh.factory<_i801.WishlistRemoteDataSource>(
-      () => _i802.WishlistRemoteDataSourceImpl(
-        firebaseAuth: gh<_i59.FirebaseAuth>(),
-        firestore: gh<_i974.FirebaseFirestore>(),
-      ),
-    );
-    gh.factory<_i601.HistoryLocalDataSource>(
-      () => _i602.HistoryLocalDataSourceImpl(
-        firebaseAuth: gh<_i59.FirebaseAuth>(),
-      ),
-    );
-
-    // ── Profile — repositories ────────────────────────────────────────────────
-    gh.factory<_i711.ProfileRepository>(
-      () => _i712.ProfileRepositoryImpl(
-        remoteDataSource: gh<_i701.ProfileRemoteDataSource>(),
-      ),
-    );
-    gh.factory<_i811.WishlistRepository>(
-      () => _i812.WishlistRepositoryImpl(
-        remoteDataSource: gh<_i801.WishlistRemoteDataSource>(),
-      ),
-    );
-    gh.factory<_i611.HistoryRepository>(
-      () => _i612.HistoryRepositoryImpl(
-        localDataSource: gh<_i601.HistoryLocalDataSource>(),
-      ),
-    );
-
-    // ── Profile — use cases ───────────────────────────────────────────────────
-    gh.factory<_i721.GetUserProfileUseCase>(
-      () => _i721.GetUserProfileUseCase(gh<_i711.ProfileRepository>()),
-    );
-    gh.factory<_i722.LogoutUseCase>(
-      () => _i722.LogoutUseCase(gh<_i711.ProfileRepository>()),
-    );
-    gh.factory<_i821.AddToWishlistUseCase>(
-      () => _i821.AddToWishlistUseCase(gh<_i811.WishlistRepository>()),
-    );
-    gh.factory<_i822.GetWishlistUseCase>(
-      () => _i822.GetWishlistUseCase(gh<_i811.WishlistRepository>()),
-    );
-    gh.factory<_i823.RemoveToWishlistUseCase>(
-      () => _i823.RemoveToWishlistUseCase(gh<_i811.WishlistRepository>()),
-    );
-    gh.factory<_i621.AddToHistoryUseCase>(
-      () => _i621.AddToHistoryUseCase(gh<_i611.HistoryRepository>()),
-    );
-    gh.factory<_i622.ClearHistoryUseCase>(
-      () => _i622.ClearHistoryUseCase(gh<_i611.HistoryRepository>()),
-    );
-    gh.factory<_i623.GetHistoryUseCase>(
-      () => _i623.GetHistoryUseCase(gh<_i611.HistoryRepository>()),
-    );
-    gh.factory<_i624.RemoveFromHistoryUseCase>(
-      () => _i624.RemoveFromHistoryUseCase(gh<_i611.HistoryRepository>()),
-    );
-
     return this;
   }
 }
+
+class _$FirebaseModule extends _i616.FirebaseModule {}
