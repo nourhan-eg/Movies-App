@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../domain/use_cases/history_usecases/add_to_history_use_case.dart';
@@ -29,13 +30,13 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState>{
       emit(HistoryError('Failed to load history'));
     }
   }
-  Future<void> _addToHistory(AddToHistoryRequest event, Emitter<HistoryState> emit) async {
-    try{
+  Future<void> _addToHistory(
+      AddToHistoryRequest event, Emitter<HistoryState> emit) async {
+    try {
       await addToHistoryUseCase(event.movie);
       emit(HistoryLoaded(await getHistoryUseCase()));
-      }catch(e){
-      emit(HistoryError('Failed to add to history'));
-      add(LoadHistory());
+    } catch (e) {
+      debugPrint('addToHistory failed: $e');
     }
   }
   Future<void> _removeFromHistory(RemoveFromHistoryRequest event, Emitter<HistoryState> emit) async {

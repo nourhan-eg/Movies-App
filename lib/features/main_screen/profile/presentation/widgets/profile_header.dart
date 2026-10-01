@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/app_colors.dart';
 import '../../../../../core/text_styles.dart';
-
+import '../../../../../core/widgets/app_avatars.dart';
 
 class ProfileHeader extends StatelessWidget {
   final String name;
@@ -20,6 +20,28 @@ class ProfileHeader extends StatelessWidget {
     required this.onEditProfile,
     required this.onExit,
   });
+
+  Widget _buildAvatarImage(String path) {
+    if (path.isEmpty) {
+      return Image.asset(AppAvatars.beardMan, fit: BoxFit.cover);
+    }
+    if (path.startsWith('http://') || path.startsWith('https://')) {
+      return Image.network(
+        path,
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) {
+          return Image.asset(AppAvatars.beardMan, fit: BoxFit.cover);
+        },
+      );
+    }
+    return Image.asset(
+      path,
+      fit: BoxFit.cover,
+      errorBuilder: (context, error, stackTrace) {
+        return Image.asset(AppAvatars.beardMan, fit: BoxFit.cover);
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,10 +68,7 @@ class ProfileHeader extends StatelessWidget {
                   ),
                 ),
                 child: ClipOval(
-                  child: Image.asset(
-                    avatarPath,
-                    fit: BoxFit.cover,
-                  ),
+                  child: _buildAvatarImage(avatarPath),
                 ),
               ),
               const SizedBox(width: 20),

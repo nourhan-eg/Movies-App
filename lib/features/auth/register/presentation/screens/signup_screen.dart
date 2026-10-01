@@ -74,10 +74,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 child: Column(
                   children: [
                     SignUpAvatars(
-                      onAvatarSelected: (path) => setState(() {
-                        _selectedAvatar = path;
-                      }),
-                    ),
+                      onAvatarSelected: (path) =>
+                        _selectedAvatar = path,
+                      ),
+
                     SizedBox(height: 24),
                     CustomTextField(
                       controller: _nameController,

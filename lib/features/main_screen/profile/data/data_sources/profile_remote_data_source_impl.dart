@@ -18,7 +18,13 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
     if (user == null) {
       throw ServerFailure('No user is logged in');
     }
-    return UserProfileModel.fromFirebaseUser(user);
+    try {
+      await user.reload();
+    } catch (_) {
+      // Ignore network errors on reload and use current user instance
+    }
+    final updatedUser = firebaseAuth.currentUser ?? user;
+    return UserProfileModel.fromFirebaseUser(updatedUser);
   }
 
   @override

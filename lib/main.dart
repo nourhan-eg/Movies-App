@@ -10,13 +10,15 @@ import 'core/di/di.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  configureDependencies();
+
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await GoogleSignIn.instance.initialize(
     serverClientId:
         '627539786150-ol9kr79dua8o5mcijo7557lgnv6l9qvt.apps.googleusercontent.com',
   );
   await Hive.initFlutter();
+
+  configureDependencies();
   runApp(const MyApp());
 }
 

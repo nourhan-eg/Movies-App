@@ -69,6 +69,12 @@ import '../../features/main_screen/profile/domain/use_cases/wishlist_usecases/ge
     as _i961;
 import '../../features/main_screen/profile/domain/use_cases/wishlist_usecases/remove_from_wishlist_use_case.dart'
     as _i31;
+import '../../features/main_screen/profile/presentation/bloc/history_bloc/history_bloc.dart'
+    as _i761;
+import '../../features/main_screen/profile/presentation/bloc/user_profile_bloc/profile_bloc.dart'
+    as _i243;
+import '../../features/main_screen/profile/presentation/bloc/wishlist_bloc/wishlist_bloc.dart'
+    as _i665;
 import '../api/api_manager.dart' as _i1047;
 import 'firebase_module.dart' as _i616;
 
@@ -149,11 +155,32 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i31.RemoveFromWishlistUseCase>(
       () => _i31.RemoveFromWishlistUseCase(gh<_i134.WishlistRepository>()),
     );
+    gh.factory<_i243.ProfileBloc>(
+      () => _i243.ProfileBloc(
+        getUserProfileUseCase: gh<_i573.GetUserProfileUseCase>(),
+        logoutUseCase: gh<_i284.LogoutUseCase>(),
+      ),
+    );
+    gh.factory<_i665.WishlistBloc>(
+      () => _i665.WishlistBloc(
+        getWishlistUseCase: gh<_i961.GetWishlistUseCase>(),
+        addToWishlistUseCase: gh<_i478.AddToWishlistUseCase>(),
+        removeFromWishlistUseCase: gh<_i31.RemoveFromWishlistUseCase>(),
+      ),
+    );
     gh.factory<_i299.GetMoviesUseCase>(
       () => _i299.GetMoviesUseCase(gh<_i663.MovieRepository>()),
     );
     gh.factory<_i183.HomeBloc>(
       () => _i183.HomeBloc(gh<_i299.GetMoviesUseCase>()),
+    );
+    gh.factory<_i761.HistoryBloc>(
+      () => _i761.HistoryBloc(
+        getHistoryUseCase: gh<_i256.GetHistoryUseCase>(),
+        addToHistoryUseCase: gh<_i541.AddToHistoryUseCase>(),
+        removeFromHistoryUseCase: gh<_i923.RemoveFromHistoryUseCase>(),
+        clearHistoryUseCase: gh<_i245.ClearHistoryUseCase>(),
+      ),
     );
     return this;
   }

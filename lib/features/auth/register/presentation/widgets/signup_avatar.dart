@@ -43,6 +43,7 @@ class _SignUpAvatarsState extends State<SignUpAvatars> {
                     setState(() {
                       selectedAvatar = index;
                     });
+                    widget.onAvatarSelected(avatars[index]);
                   },
                   child: CircleAvatar(
                     radius: isSelected ? 55 : 35,
