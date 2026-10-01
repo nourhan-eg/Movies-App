@@ -146,8 +146,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i961.GetWishlistUseCase>(
       () => _i961.GetWishlistUseCase(gh<_i134.WishlistRepository>()),
     );
-    gh.factory<_i31.RemoveToWishlistUseCase>(
-      () => _i31.RemoveToWishlistUseCase(gh<_i134.WishlistRepository>()),
+    gh.factory<_i31.RemoveFromWishlistUseCase>(
+      () => _i31.RemoveFromWishlistUseCase(gh<_i134.WishlistRepository>()),
     );
     gh.factory<_i299.GetMoviesUseCase>(
       () => _i299.GetMoviesUseCase(gh<_i663.MovieRepository>()),

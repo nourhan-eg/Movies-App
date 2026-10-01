@@ -3,10 +3,10 @@ import 'package:movies/features/main_screen/home/domain/entities/movie_entity.da
 import 'package:movies/features/main_screen/profile/domain/repositories/wishlist_repository.dart';
 
 @injectable
-class RemoveToWishlistUseCase {
+class RemoveFromWishlistUseCase {
   final WishlistRepository _repository;
 
-  RemoveToWishlistUseCase(this._repository);
+  RemoveFromWishlistUseCase(this._repository);
 
   Future<void> call(MovieEntity movie) async {
     return await _repository.removeFromWishlist(movie);
