@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart' as selectedMovie;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/core/app_colors.dart';
@@ -7,12 +8,18 @@ import 'package:movies/features/main_screen/tabs/search/presentation/bloc/search
 import 'package:movies/features/main_screen/tabs/search/presentation/bloc/search_events.dart';
 import 'package:movies/features/main_screen/tabs/search/presentation/bloc/search_states.dart';
 
+import '../../../../../../core/app_routes.dart';
 import '../../../../../../core/widgets/movie_card.dart';
 
 
-class SearchTab extends StatelessWidget {
+class SearchTab extends StatefulWidget {
   const SearchTab({super.key});
 
+  @override
+  State<SearchTab> createState() => _SearchTabState();
+}
+
+class _SearchTabState extends State<SearchTab> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -72,7 +79,17 @@ class SearchTab extends StatelessWidget {
                                   crossAxisSpacing: 16,
                                   mainAxisSpacing: 16,
                                   childAspectRatio: 0.65),
-                              itemBuilder:(context, index) => MovieCard(movie: state.movies[index]),
+                              itemBuilder:(context, index) {
+                                final movie = state.movies[index];
+                                return InkWell(
+                                    onTap: () {
+                                      Navigator.pushNamed(
+                                        context,
+                                        AppRoutes.movieDetails,
+                                        arguments: movie.id,
+                                      );
+                                    },
+                                    child: MovieCard(movie: state.movies[index]));},
                             ),
                           );
                         } else if (state is SearchErrorState) {

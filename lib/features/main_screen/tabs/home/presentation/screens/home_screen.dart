@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/app_colors.dart';
+import '../../../../../../core/app_routes.dart';
 import '../bloc/home_bloc.dart';
 import '../bloc/home_state.dart';
 import '../widgets/genre_section.dart';
@@ -52,7 +53,11 @@ class HomeScreen extends StatelessWidget {
                       HomeBanner(
                         movies: movies,
                         onMovieTap: (selectedMovie) {
-                          // Action on banner movie selection
+                          Navigator.pushNamed(
+                            context,
+                            AppRoutes.movieDetails,
+                            arguments: selectedMovie.id,
+                          );
                         },
                       ),
 
@@ -68,7 +73,11 @@ class HomeScreen extends StatelessWidget {
                             genre: genre,
                             movies: genreMovies,
                             onMovieTap: (selectedMovie) {
-                              // Action on selecting a movie card
+                              Navigator.pushNamed(
+                                context,
+                                AppRoutes.movieDetails,
+                                arguments: selectedMovie.id,
+                              );
                             },
                             onSeeMoreTap: () {
                               // Action on selecting See More
