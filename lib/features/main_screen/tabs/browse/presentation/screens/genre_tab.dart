@@ -1,10 +1,9 @@
-import 'package:dartz/dartz.dart' as selectedMovie;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/core/di/di.dart';
 import 'package:movies/core/widgets/movie_card.dart';
 
-import '../../../../../../core/app_routes.dart';
+import 'package:movies/features/movie_details/presentation/screens/movie_details_screen.dart';
 import '../bloc/browse_bloc.dart';
 import '../bloc/browse_events.dart';
 import '../bloc/browse_states.dart';
@@ -49,13 +48,9 @@ class GenreTab extends StatelessWidget {
                     final movie = state.movies[index];
                     return InkWell(
                       onTap: () {
-                        Navigator.pushNamed(
-                          context,
-                          AppRoutes.movieDetails,
-                          arguments: movie.id,
-                        );
+                        MovieDetailsScreen.open(context, movie);
                       },
-                      child: MovieCard(movie: state.movies[index]));},
+                      child: MovieCard(movie: movie));},
               ),
             );
           }

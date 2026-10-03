@@ -6,7 +6,7 @@ import '../../../main_screen/tabs/home/domain/entities/movie_entity.dart';
 
 class MovieSimilarSection extends StatelessWidget {
   final List<MovieEntity> movies;
-  final Function(int movieId)? onMovieTap;
+  final ValueChanged<MovieEntity>? onMovieTap;
 
   const MovieSimilarSection({
     super.key,
@@ -46,7 +46,7 @@ class MovieSimilarSection extends StatelessWidget {
               return GestureDetector(
                 onTap: () {
                   if (onMovieTap != null) {
-                    onMovieTap!(movie.id);
+                    onMovieTap!(movie);
                   }
                 },
                 child: ClipRRect(

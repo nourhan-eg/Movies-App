@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../../../core/app_colors.dart';
 import '../../../../../../core/widgets/movie_card.dart';
 import '../../../home/domain/entities/movie_entity.dart';
+import 'package:movies/features/movie_details/presentation/screens/movie_details_screen.dart';
 
 class ProfileMoviesGrid extends StatelessWidget {
   final List<MovieEntity> movies;
@@ -47,7 +48,7 @@ class _MoviesGridView extends StatelessWidget {
       itemBuilder: (context, index) {
         return MovieCard(
           movie: movies[index],
-          onTap: () {},
+          onTap: () => MovieDetailsScreen.open(context, movies[index]),
         );
       },
     );
