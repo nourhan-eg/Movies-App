@@ -2,20 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:movies/core/app_colors.dart';
-import 'package:movies/features/main_screen/search/presentation/screens/search_tab.dart';
-import '../../../../core/app_icons.dart';
-import '../../../../core/di/di.dart';
-import '../../browse/presentation/screens/browse_screen.dart';
-import '../../home/presentation/bloc/home_bloc.dart';
-import '../../home/presentation/bloc/home_event.dart';
-import '../../home/presentation/screens/home_screen.dart';
-import '../../profile/presentation/bloc/history_bloc/history_bloc.dart';
-import '../../profile/presentation/bloc/history_bloc/history_event.dart';
-import '../../profile/presentation/bloc/user_profile_bloc/profile_bloc.dart';
-import '../../profile/presentation/bloc/user_profile_bloc/profile_event.dart';
-import '../../profile/presentation/bloc/wishlist_bloc/wishlist_bloc.dart';
-import '../../profile/presentation/bloc/wishlist_bloc/wishlist_event.dart';
-import '../../profile/presentation/screens/profile_screen.dart';
+import 'package:movies/core/app_icons.dart';
+import 'package:movies/core/di/di.dart';
+import 'package:movies/features/main_screen/tabs/browse/presentation/bloc/browse_bloc.dart';
+import 'package:movies/features/main_screen/tabs/browse/presentation/bloc/browse_events.dart';
+import 'package:movies/features/main_screen/tabs/browse/presentation/screens/browse_screen.dart';
+import 'package:movies/features/main_screen/tabs/home/presentation/bloc/home_bloc.dart';
+import 'package:movies/features/main_screen/tabs/home/presentation/bloc/home_event.dart';
+import 'package:movies/features/main_screen/tabs/home/presentation/screens/home_screen.dart';
+import 'package:movies/features/main_screen/tabs/profile/presentation/bloc/history_bloc/history_bloc.dart';
+import 'package:movies/features/main_screen/tabs/profile/presentation/bloc/history_bloc/history_event.dart';
+import 'package:movies/features/main_screen/tabs/profile/presentation/bloc/user_profile_bloc/profile_bloc.dart';
+import 'package:movies/features/main_screen/tabs/profile/presentation/bloc/user_profile_bloc/profile_event.dart';
+import 'package:movies/features/main_screen/tabs/profile/presentation/bloc/wishlist_bloc/wishlist_bloc.dart';
+import 'package:movies/features/main_screen/tabs/profile/presentation/bloc/wishlist_bloc/wishlist_event.dart';
+import 'package:movies/features/main_screen/tabs/profile/presentation/screens/profile_screen.dart';
+import 'package:movies/features/main_screen/tabs/search/presentation/bloc/search_bloc.dart';
+import 'package:movies/features/main_screen/tabs/search/presentation/bloc/search_events.dart';
+import 'package:movies/features/main_screen/tabs/search/presentation/screens/search_tab.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -30,8 +34,8 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _tabs =  [
    HomeScreen(),
-    Center(child: Text('Search ',style: TextStyle(color: Colors.white,fontSize: 30),)),
-    Center(child: Text('Browse ',style: TextStyle(color: Colors.white,fontSize: 30))),
+    SearchTab(),
+    BrowseScreen(),
     const ProfileScreen(),
   ];
   final List<String> _icons = const [
@@ -59,6 +63,12 @@ class _MainScreenState extends State<MainScreen> {
         BlocProvider(
           create: (context) => getIt<HistoryBloc>()..add(LoadHistory()),
         ),
+        BlocProvider(
+          create: (context) => getIt<SearchBloc>()..add( SearchMoviesRequested(query: '')),
+        ),
+        BlocProvider(
+          create: (context) => getIt<BrowseBloc>()..add(GetMoviesByGenreRequested(genre: '')),
+        )
       ],
       child: Scaffold(
         body: Stack(
