@@ -178,7 +178,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       nameController: _nameController,
                       phoneController: _phoneController,
                     ),
-                    const SizedBox(height: 32),
+                    const SizedBox(height: 250),
                     EditProfileActions(
                       isLoading: isLoading,
                       onDelete: _onDelete,
