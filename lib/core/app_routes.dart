@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movies/features/main_screen/browse/presentation/screens/browse_screen.dart';
+import 'package:movies/features/main_screen/tabs/browse/presentation/screens/browse_screen.dart';
 import '../features/auth/forget_password/presentation/screens/reset_password.dart';
 import '../features/auth/login/presentation/screens/login_screen.dart';
 import '../features/auth/register/presentation/screens/signup_screen.dart';
