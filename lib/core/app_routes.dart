@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies/features/main_screen/browse/presentation/screens/browse_screen.dart';
 import '../features/auth/forget_password/presentation/screens/reset_password.dart';
 import '../features/auth/login/presentation/screens/login_screen.dart';
 import '../features/auth/register/presentation/screens/signup_screen.dart';
@@ -12,6 +13,7 @@ class AppRoutes {
   static const String register = '/register';
   static const String main = '/main';
   static const String forgetPassword = '/forget';
+  static const String browse = '/browse';
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -38,6 +40,10 @@ class AppRoutes {
       case forgetPassword:
         return MaterialPageRoute(
           builder: (_) => const ForgetPasswordScreen(),
+        );
+      case browse:
+        return MaterialPageRoute(
+          builder: (_) => const BrowseScreen(),
         );
 
 

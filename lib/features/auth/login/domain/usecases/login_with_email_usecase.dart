@@ -1,8 +1,10 @@
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 import 'package:movies/features/auth/login/domain/repositories/login_repository.dart';
 
 import '../../../../../failure.dart';
 
+@injectable
 class LoginWithEmailUsecase {
   LoginRepository loginRepository;
 

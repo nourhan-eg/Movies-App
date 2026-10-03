@@ -1,8 +1,10 @@
 import 'package:bloc/bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:movies/features/auth/forget_password/domain/usecases/forget_password_usecase.dart';
 import 'forget_password_events.dart';
 import 'forget_password_states.dart';
 
+@injectable
 class ForgetPasswordBloc extends Bloc<ForgetPasswordEvents, ForgetPasswordStates> {
   final ForgetPasswordUsecase forgetPasswordUsecase;
 

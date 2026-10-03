@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../app_colors.dart';
 import '../../features/main_screen/home/domain/entities/movie_entity.dart';
 
+
 class MovieCard extends StatelessWidget {
   final MovieEntity movie;
   final VoidCallback? onTap;
@@ -43,6 +44,7 @@ class MovieCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(16.0),
           child: Stack(
             children: [
+
               Positioned.fill(
                 child: Image.network(
                   movie.posterImage,
@@ -86,6 +88,7 @@ class MovieCard extends StatelessWidget {
                   },
                 ),
               ),
+
 
               Positioned(
                 top: 8.0,

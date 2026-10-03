@@ -1,8 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:injectable/injectable.dart';
 import 'package:movies/failure.dart';
 import 'package:movies/features/auth/register/data/data_sources/signup_remote_data_source.dart';
 
+@Injectable(as: SignupRemoteDataSource)
 class SignupRemoteDataSourceImpl implements SignupRemoteDataSource {
   final FirebaseAuth firebaseAuth;
 

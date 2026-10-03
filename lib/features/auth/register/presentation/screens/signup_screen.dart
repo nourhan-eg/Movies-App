@@ -1,12 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/core/app_colors.dart';
+import 'package:movies/core/di/di.dart';
 import 'package:movies/core/validator.dart';
 import 'package:movies/core/widgets/app_avatars.dart';
-import 'package:movies/features/auth/register/data/data_sources/signup_remote_data_source_impl.dart';
-import 'package:movies/features/auth/register/data/repositories/signup_repository_impl.dart';
-import 'package:movies/features/auth/register/domain/usecases/signup_usecase.dart';
 import 'package:movies/features/auth/register/presentation/bloc/signup_bloc.dart';
 import 'package:movies/features/auth/register/presentation/bloc/signup_states.dart';
 
@@ -39,15 +36,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SignupBloc(
-        signupUsecase: SignupUsecase(
-          signupRepository: SignupRepositoryImpl(
-            signupRemoteDataSource: SignupRemoteDataSourceImpl(
-              firebaseAuth: FirebaseAuth.instance,
-            ),
-          ),
-        ),
-      ),
+      create: (context) => getIt<SignupBloc>(),
       child: BlocConsumer<SignupBloc, SignupStates>(
         builder: (BuildContext context, SignupStates state) {
           return Scaffold(
