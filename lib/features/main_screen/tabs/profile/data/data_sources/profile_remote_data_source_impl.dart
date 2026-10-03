@@ -33,6 +33,7 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
 
     String? avatar;
     String? phone;
+    String? name;
     try {
       final doc =
           await firestore.collection('users').doc(updatedUser.uid).get();
@@ -44,6 +45,9 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
         if (data.containsKey('phone') && data['phone'] != null) {
           phone = data['phone'] as String?;
         }
+        if (data.containsKey('name') && data['name'] != null) {
+          name = data['name'] as String?;
+        }
       }
     } catch (_) {
       // Ignore Firestore read errors
@@ -54,10 +58,12 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
 
     return UserProfileModel(
       uid: updatedUser.uid,
-      name: updatedUser.displayName ?? 'User',
+      name: (name != null && name.isNotEmpty)
+          ? name
+          : (updatedUser.displayName ?? 'User'),
       email: updatedUser.email ?? '',
       photoUrl: resolvedAvatar,
-      phone: phone,
+      phone: phone ?? updatedUser.phoneNumber,
     );
   }
 
@@ -85,7 +91,7 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
       await user.updateDisplayName(name);
       await user.updatePhotoURL(avatar);
       await firestore.collection('users').doc(user.uid).set(
-        {'avatar': avatar, 'phone': phone},
+        {'name': name, 'avatar': avatar, 'phone': phone},
         SetOptions(merge: true),
       );
       await user.reload();

@@ -41,6 +41,9 @@ class SignupRemoteDataSourceImpl implements SignupRemoteDataSource {
       if (uid != null) {
         try {
           await firestore.collection('users').doc(uid).set({
+            'name': name,
+            'email': email,
+            'phone': phone,
             'avatar': avatar,
           }, SetOptions(merge: true));
         } catch (e) {
