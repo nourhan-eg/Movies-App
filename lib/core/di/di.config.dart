@@ -143,6 +143,20 @@ import '../../features/main_screen/tabs/search/domain/usecases/search_movies_use
     as _i1066;
 import '../../features/main_screen/tabs/search/presentation/bloc/search_bloc.dart'
     as _i747;
+import '../../features/movie_details/data/data_sources/movie_details_remote_data_source.dart'
+    as _i172;
+import '../../features/movie_details/data/data_sources/movie_details_remote_data_source_impl.dart'
+    as _i115;
+import '../../features/movie_details/data/repositories/movie_details_repository_impl.dart'
+    as _i541;
+import '../../features/movie_details/domain/repositories/movie_details_repository.dart'
+    as _i1010;
+import '../../features/movie_details/domain/usecases/get_movie_details_usecase.dart'
+    as _i124;
+import '../../features/movie_details/domain/usecases/get_movie_suggestions_usecase.dart'
+    as _i106;
+import '../../features/movie_details/presentation/bloc/movie_details_bloc.dart'
+    as _i1001;
 import '../api/api_manager.dart' as _i1047;
 import 'di.dart' as _i913;
 import 'firebase_module.dart' as _i616;
@@ -201,6 +215,9 @@ extension GetItInjectableX on _i174.GetIt {
         firebaseAuth: gh<_i59.FirebaseAuth>(),
       ),
     );
+    gh.factory<_i172.MovieDetailsRemoteDataSource>(
+      () => _i115.MovieDetailsRemoteDataSourceImpl(gh<_i1047.ApiManager>()),
+    );
     gh.factory<_i364.MovieRemoteDataSource>(
       () => _i546.MovieRemoteDataSourceImpl(gh<_i1047.ApiManager>()),
     );
@@ -213,6 +230,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i734.SearchRepository>(
       () => _i145.SearchRepositoryImpl(
         searchMoviesDataSource: gh<_i21.SearchMoviesDataSource>(),
+      ),
+    );
+    gh.factory<_i1010.MovieDetailsRepository>(
+      () => _i541.MovieDetailsRepositoryImpl(
+        gh<_i172.MovieDetailsRemoteDataSource>(),
       ),
     );
     gh.factory<_i975.ForgetPasswordRepository>(
@@ -265,6 +287,13 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i1042.RemoveFromWishlistUseCase>(
       () => _i1042.RemoveFromWishlistUseCase(gh<_i783.WishlistRepository>()),
+    );
+    gh.factory<_i124.GetMovieDetailsUseCase>(
+      () => _i124.GetMovieDetailsUseCase(gh<_i1010.MovieDetailsRepository>()),
+    );
+    gh.factory<_i106.GetMovieSuggestionsUseCase>(
+      () =>
+          _i106.GetMovieSuggestionsUseCase(gh<_i1010.MovieDetailsRepository>()),
     );
     gh.factory<_i321.GetMoviesByGenreUsecase>(
       () => _i321.GetMoviesByGenreUsecase(gh<_i43.BrowseRepository>()),
@@ -352,6 +381,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i800.HomeBloc>(
       () => _i800.HomeBloc(gh<_i682.GetMoviesUseCase>()),
+    );
+    gh.factory<_i1001.MovieDetailsBloc>(
+      () => _i1001.MovieDetailsBloc(
+        getMovieDetailsUseCase: gh<_i124.GetMovieDetailsUseCase>(),
+        getMovieSuggestionsUseCase: gh<_i106.GetMovieSuggestionsUseCase>(),
+      ),
     );
     gh.factory<_i344.HistoryBloc>(
       () => _i344.HistoryBloc(

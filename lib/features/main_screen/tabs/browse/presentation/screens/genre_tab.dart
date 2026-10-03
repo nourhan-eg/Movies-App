@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/core/di/di.dart';
 import 'package:movies/core/widgets/movie_card.dart';
 
+import 'package:movies/features/movie_details/presentation/screens/movie_details_screen.dart';
 import '../bloc/browse_bloc.dart';
 import '../bloc/browse_events.dart';
 import '../bloc/browse_states.dart';
@@ -43,7 +44,13 @@ class GenreTab extends StatelessWidget {
                       crossAxisSpacing: 16,
                       mainAxisSpacing: 16,
                       childAspectRatio: 0.65),
-                  itemBuilder:(context, index) => MovieCard(movie: state.movies[index]),
+                  itemBuilder:(context, index) {
+                    final movie = state.movies[index];
+                    return InkWell(
+                      onTap: () {
+                        MovieDetailsScreen.open(context, movie);
+                      },
+                      child: MovieCard(movie: movie));},
               ),
             );
           }

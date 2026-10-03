@@ -6,13 +6,18 @@ import 'package:movies/core/widgets/custom_text_field.dart';
 import 'package:movies/features/main_screen/tabs/search/presentation/bloc/search_bloc.dart';
 import 'package:movies/features/main_screen/tabs/search/presentation/bloc/search_events.dart';
 import 'package:movies/features/main_screen/tabs/search/presentation/bloc/search_states.dart';
-
+import 'package:movies/features/movie_details/presentation/screens/movie_details_screen.dart';
 import '../../../../../../core/widgets/movie_card.dart';
 
 
-class SearchTab extends StatelessWidget {
+class SearchTab extends StatefulWidget {
   const SearchTab({super.key});
 
+  @override
+  State<SearchTab> createState() => _SearchTabState();
+}
+
+class _SearchTabState extends State<SearchTab> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -72,7 +77,13 @@ class SearchTab extends StatelessWidget {
                                   crossAxisSpacing: 16,
                                   mainAxisSpacing: 16,
                                   childAspectRatio: 0.65),
-                              itemBuilder:(context, index) => MovieCard(movie: state.movies[index]),
+                              itemBuilder:(context, index) {
+                                final movie = state.movies[index];
+                                return InkWell(
+                                    onTap: () {
+                                      MovieDetailsScreen.open(context, movie);
+                                    },
+                                    child: MovieCard(movie: movie));},
                             ),
                           );
                         } else if (state is SearchErrorState) {
