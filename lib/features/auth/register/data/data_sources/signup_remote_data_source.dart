@@ -9,5 +9,6 @@ abstract class SignupRemoteDataSource {
     required String phone,
     required String password,
     required String rePassword,
+    required String avatar,
   });
 }

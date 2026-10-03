@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import '../../../../../core/widgets/app_avatars.dart';
 
 class SignUpAvatars extends StatefulWidget {
-  const SignUpAvatars({super.key});
+  final ValueChanged<String> onAvatarSelected;
+  const SignUpAvatars({super.key, required this.onAvatarSelected});
 
   @override
   State<SignUpAvatars> createState() => _SignUpAvatarsState();
@@ -17,6 +18,12 @@ class _SignUpAvatarsState extends State<SignUpAvatars> {
     AppAvatars.braidsGirl,
     AppAvatars.blondeMan,
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    widget.onAvatarSelected(avatars[selectedAvatar]);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +43,7 @@ class _SignUpAvatarsState extends State<SignUpAvatars> {
                     setState(() {
                       selectedAvatar = index;
                     });
+                    widget.onAvatarSelected(avatars[index]);
                   },
                   child: CircleAvatar(
                     radius: isSelected ? 55 : 35,

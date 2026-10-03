@@ -17,10 +17,11 @@ class SignupBloc extends Bloc<SignupEvents, SignupStates> {
         phone: event.phone,
         password: event.password,
         rePassword: event.rePassword,
+        avatar: event.avatar,
       );
       result.fold(
-            (failure) => emit(SignupFailure(message: failure.message)),
-            (_) => emit(SignupSuccess()),
+        (failure) => emit(SignupFailure(message: failure.message)),
+        (_) => emit(SignupSuccess()),
       );
     });
   }

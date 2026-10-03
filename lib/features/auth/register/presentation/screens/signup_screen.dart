@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/core/app_colors.dart';
 import 'package:movies/core/di/di.dart';
 import 'package:movies/core/validator.dart';
+import 'package:movies/core/widgets/app_avatars.dart';
 import 'package:movies/features/auth/register/presentation/bloc/signup_bloc.dart';
 import 'package:movies/features/auth/register/presentation/bloc/signup_states.dart';
 
@@ -23,6 +24,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  String _selectedAvatar = AppAvatars.beardMan;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -60,7 +62,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 key: _formKey,
                 child: Column(
                   children: [
-                    SignUpAvatars(),
+                    SignUpAvatars(
+                      onAvatarSelected: (path) =>
+                        _selectedAvatar = path,
+                      ),
+
                     SizedBox(height: 24),
                     CustomTextField(
                       controller: _nameController,
@@ -120,6 +126,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               phone: _phoneController.text.trim(),
                               password: _passwordController.text,
                               rePassword: _confirmPasswordController.text,
+                              avatar: _selectedAvatar,
                             ),
                           );
                         }
@@ -133,9 +140,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       children: [
                         Text(
                           "Already Have Account ? ",
-                          style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                            color: AppColors.white,
-                          ),
+                          style: Theme.of(context).textTheme.titleSmall
+                              ?.copyWith(color: AppColors.white),
                         ),
                         InkWell(
                           onTap: () {

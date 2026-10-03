@@ -6,6 +6,7 @@ class SignupRequested extends SignupEvents {
   final String password;
   final String rePassword;
   final String phone;
+  final String avatar;
 
   SignupRequested({
     required this.name,
@@ -13,5 +14,6 @@ class SignupRequested extends SignupEvents {
     required this.password,
     required this.rePassword,
     required this.phone,
+    required this.avatar,
   });
 }

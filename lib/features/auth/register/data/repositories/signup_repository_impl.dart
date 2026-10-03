@@ -17,6 +17,7 @@ class SignupRepositoryImpl implements SignupRepository {
     required String phone,
     required String password,
     required String rePassword,
+    required String avatar,
   }) {
     return signupRemoteDataSource.signUp(
       name: name,
@@ -24,6 +25,7 @@ class SignupRepositoryImpl implements SignupRepository {
       phone: phone,
       password: password,
       rePassword: rePassword,
+      avatar: avatar,
     );
   }
 }

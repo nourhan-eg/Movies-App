@@ -10,11 +10,7 @@ class HomeBanner extends StatefulWidget {
   final List<MovieEntity> movies;
   final ValueChanged<MovieEntity>? onMovieTap;
 
-  const HomeBanner({
-    super.key,
-    required this.movies,
-    this.onMovieTap,
-  });
+  const HomeBanner({super.key, required this.movies, this.onMovieTap});
 
   @override
   State<HomeBanner> createState() => _HomeBannerState();
@@ -52,8 +48,8 @@ class _HomeBannerState extends State<HomeBanner> {
     final screenWidth = mediaQuery.size.width;
     final screenHeight = mediaQuery.size.height;
 
-    final activeMovie = widget.movies[_currentIndex.clamp(0, widget.movies.length - 1)];
-
+    final activeMovie =
+        widget.movies[_currentIndex.clamp(0, widget.movies.length - 1)];
 
     final carouselHeight = (screenHeight * 0.40).clamp(280.0, 400.0);
     final cardWidth = (screenWidth * 0.55).clamp(180.0, 270.0);
@@ -64,7 +60,6 @@ class _HomeBannerState extends State<HomeBanner> {
 
     return Stack(
       children: [
-
         Positioned.fill(
           child: AnimatedSwitcher(
             duration: const Duration(milliseconds: 500),
@@ -88,10 +83,7 @@ class _HomeBannerState extends State<HomeBanner> {
                   Container(
                     decoration: const BoxDecoration(
                       gradient: LinearGradient(
-                        colors: [
-                          Colors.transparent,
-                          AppColors.dark,
-                        ],
+                        colors: [Colors.transparent, AppColors.dark],
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                       ),
