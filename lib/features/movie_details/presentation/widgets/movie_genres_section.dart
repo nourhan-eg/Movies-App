@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies/core/app_texts.dart';
 import '../../../../core/app_colors.dart';
 import '../../../../core/text_styles.dart';
 
@@ -20,7 +21,7 @@ class MovieGenresSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Genres',
+            AppTexts.genres,
             style: TextStyles.title2(AppColors.white).copyWith(
               fontSize: 20,
               fontWeight: FontWeight.bold,

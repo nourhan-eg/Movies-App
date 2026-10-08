@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:movies/core/app_texts.dart';
 import '../../../../../../core/app_colors.dart';
 import '../../../../../../core/widgets/movie_card.dart';
 import '../../domain/entities/movie_entity.dart';
@@ -106,7 +107,7 @@ class _HomeBannerState extends State<HomeBanner> {
 
 
               Text(
-                'Available Now',
+                AppTexts.availableNow,
                 textAlign: TextAlign.center,
                 style: GoogleFonts.coveredByYourGrace(
                   fontSize: headerFontSize,
@@ -168,7 +169,7 @@ class _HomeBannerState extends State<HomeBanner> {
               const SizedBox(height: 12.0),
 
               Text(
-                'Watch Now',
+                AppTexts.watchNow,
                 textAlign: TextAlign.center,
                 style: GoogleFonts.coveredByYourGrace(
                   fontSize: footerFontSize,

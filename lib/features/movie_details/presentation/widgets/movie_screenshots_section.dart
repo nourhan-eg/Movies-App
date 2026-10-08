@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:movies/core/app_texts.dart';
 import '../../../../core/app_colors.dart';
 import '../../../../core/text_styles.dart';
 
@@ -21,7 +22,7 @@ class MovieScreenshotsSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Screen Shots',
+            AppTexts.screenShots,
             style: TextStyles.title2(AppColors.white).copyWith(
               fontSize: 20,
               fontWeight: FontWeight.bold,

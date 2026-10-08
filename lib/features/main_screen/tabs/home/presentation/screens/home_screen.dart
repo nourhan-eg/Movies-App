@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies/core/app_texts.dart';
 
 import '../../../../../../core/app_colors.dart';
 import 'package:movies/features/movie_details/presentation/screens/movie_details_screen.dart';
@@ -28,7 +29,7 @@ class HomeScreen extends StatelessWidget {
             if (movies.isEmpty) {
               return const Center(
                 child: Text(
-                  'No movies available',
+                  AppTexts.noMoviesAvailable,
                   style: TextStyle(color: AppColors.white, fontSize: 16.0),
                 ),
               );

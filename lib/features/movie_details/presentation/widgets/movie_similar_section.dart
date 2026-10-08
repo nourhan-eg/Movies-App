@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:movies/core/app_texts.dart';
 import '../../../../core/app_colors.dart';
 import '../../../../core/text_styles.dart';
 import '../../../main_screen/tabs/home/domain/entities/movie_entity.dart';
@@ -24,7 +25,7 @@ class MovieSimilarSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Similar',
+            AppTexts.similar,
             style: TextStyles.title2(AppColors.white).copyWith(
               fontSize: 20,
               fontWeight: FontWeight.bold,

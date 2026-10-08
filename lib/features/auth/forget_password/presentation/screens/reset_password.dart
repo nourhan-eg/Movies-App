@@ -3,8 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/core/app_colors.dart';
 import 'package:movies/core/app_icons.dart';
 import 'package:movies/core/app_images.dart';
+import 'package:movies/core/app_texts.dart';
 import 'package:movies/core/di/di.dart';
+import 'package:movies/core/validator.dart';
 import 'package:movies/core/widgets/custom_button.dart';
+import 'package:movies/core/widgets/custom_snack_bar.dart';
 import 'package:movies/core/widgets/custom_text_field.dart';
 import 'package:movies/features/auth/forget_password/presentation/bloc/forget_password_bloc.dart';
 import 'package:movies/features/auth/forget_password/presentation/bloc/forget_password_events.dart';
@@ -20,6 +23,7 @@ class ForgetPasswordScreen extends StatefulWidget {
 
 class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   final TextEditingController _emailController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -34,25 +38,13 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
       child: BlocConsumer<ForgetPasswordBloc, ForgetPasswordStates>(
         listener: (context, state) {
           if (state is ForgetPasswordSuccess) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Password reset email sent successfully! Please check your inbox.'),
-                backgroundColor: Colors.green,
-              ),
-            );
+            CustomSnackBar.showSuccess(context, AppTexts.resetPasswordSuccess);
             Navigator.pop(context);
           } else if (state is ForgetPasswordFailure) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.message),
-                backgroundColor: Colors.red,
-              ),
-            );
+            CustomSnackBar.showError(context, state.message);
           }
         },
         builder: (context, state) {
-          final isLoading = state is ForgetPasswordLoading;
-
           return Scaffold(
             appBar: AppBar(
               backgroundColor: AppColors.dark,
@@ -67,43 +59,50 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
               ),
               centerTitle: true,
               title: Text(
-                "Forget Password",
+                AppTexts.forgetPassword,
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
             ),
             body: SingleChildScrollView(
               padding: const EdgeInsets.all(16),
-              child: Column(
-                children: [
-                  const SizedBox(height: 24),
-                  Image.asset(
-                    AppImages.forgetPassword,
-                    height: 220,
-                  ),
-                  const SizedBox(height: 32),
-                  CustomTextField(
-                    controller: _emailController,
-                    prefixIcon: AppIcons.emailIcon,
-                    hintText: "Email",
-                    obscureText: false,
-                    keyboardType: TextInputType.emailAddress,
-                  ),
-                  const SizedBox(height: 24),
-                  isLoading
-                      ? const CircularProgressIndicator(color: AppColors.yellow)
-                      : CustomButton(
-                          text: "Verify Email",
-                          onPressed: () {
-                            context.read<ForgetPasswordBloc>().add(
-                                  ResetPasswordRequested(
-                                    email: _emailController.text,
-                                  ),
-                                );
-                          },
-                          backgroundColor: AppColors.yellow,
-                          textColor: AppColors.black,
-                        ),
-                ],
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    const SizedBox(height: 24),
+                    Image.asset(
+                      AppImages.forgetPassword,
+                      height: 220,
+                    ),
+                    const SizedBox(height: 32),
+                    CustomTextField(
+                      controller: _emailController,
+                      prefixIcon: AppIcons.emailIcon,
+                      hintText: AppTexts.email,
+                      obscureText: false,
+                      keyboardType: TextInputType.emailAddress,
+                      validator: Validators.email,
+                    ),
+                    const SizedBox(height: 24),
+                    CustomButton(
+                      text: AppTexts.verifyEmail,
+                      isLoading: state is ForgetPasswordLoading,
+                      onPressed: state is ForgetPasswordLoading
+                          ? () {}
+                          : () {
+                              if (_formKey.currentState!.validate()) {
+                                context.read<ForgetPasswordBloc>().add(
+                                      ResetPasswordRequested(
+                                        email: _emailController.text.trim(),
+                                      ),
+                                    );
+                              }
+                            },
+                      backgroundColor: AppColors.yellow,
+                      textColor: AppColors.black,
+                    ),
+                  ],
+                ),
               ),
             ),
           );

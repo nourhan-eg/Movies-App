@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies/core/app_texts.dart';
 import '../../../../core/app_colors.dart';
 import '../../../../core/di/di.dart';
 import '../../../../core/text_styles.dart';
@@ -121,7 +122,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                           backgroundColor: AppColors.yellow,
                         ),
                         child: Text(
-                          'Retry',
+                          AppTexts.retry,
                           style: TextStyles.headingSmall(AppColors.dark),
                         ),
                       ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies/core/app_colors.dart';
 import 'package:movies/core/app_routes.dart';
+import 'package:movies/core/app_texts.dart';
 import 'package:movies/core/text_styles.dart';
 import 'package:movies/core/widgets/custom_button.dart';
 import 'package:movies/features/onboarding_screen/models/onboarding_model.dart';
@@ -139,7 +140,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         ],
                         const SizedBox(height: 20),
                         CustomButton(
-                          text: isLast ? 'Finish' : 'Next',
+                          text: isLast ? AppTexts.finish : AppTexts.next,
                           backgroundColor: AppColors.yellow,
                           textColor: AppColors.black,
                           onPressed: _next,
@@ -147,7 +148,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         if (!isFirst) ...[
                           const SizedBox(height: 12),
                           CustomButton(
-                            text: 'Back',
+                            text: AppTexts.back,
                             backgroundColor: Colors.transparent,
                             textColor: const Color(0xFFF6BD00),
                             hasBorder: true,

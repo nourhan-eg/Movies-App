@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies/core/app_texts.dart';
 
 import '../../../../../../core/app_colors.dart';
 import '../../../../../../core/text_styles.dart';
@@ -78,8 +79,8 @@ class ProfileHeader extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    _StatItem(count: wishListCount, label: 'Wish List'),
-                    _StatItem(count: historyCount, label: 'History'),
+                    _StatItem(count: wishListCount, label: AppTexts.watchList),
+                    _StatItem(count: historyCount, label: AppTexts.history),
                   ],
                 ),
               ),
@@ -97,7 +98,7 @@ class ProfileHeader extends StatelessWidget {
             children: [
               Expanded(
                 child: _ProfileActionButton(
-                  text: 'Edit Profile',
+                  text: AppTexts.editProfile,
                   backgroundColor: AppColors.yellow,
                   textColor: AppColors.dark,
                   onPressed: onEditProfile,
@@ -106,7 +107,7 @@ class ProfileHeader extends StatelessWidget {
               const SizedBox(width: 12),
               Expanded(
                 child: _ProfileActionButton(
-                  text: 'Exit',
+                  text: AppTexts.exit,
                   backgroundColor: AppColors.red,
                   textColor: AppColors.white,
                   onPressed: onExit,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies/core/app_texts.dart';
 import '../../../../../../core/app_colors.dart';
 import '../../../../../../core/widgets/movie_card.dart';
 import '../../domain/entities/movie_entity.dart';
@@ -56,7 +57,7 @@ class GenreSection extends StatelessWidget {
                   child: Row(
                     children: [
                       Text(
-                        'See More',
+                        AppTexts.seeMore,
                         style: TextStyle(
                           color: AppColors.yellow,
                           fontSize: seeMoreFontSize,

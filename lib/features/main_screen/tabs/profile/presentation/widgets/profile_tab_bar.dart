@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies/core/app_texts.dart';
 
 import '../../../../../../core/app_colors.dart';
 import '../../../../../../core/text_styles.dart';
@@ -19,13 +20,13 @@ class ProfileTabBar extends StatelessWidget {
       children: [
         _TabItem(
           icon: Icons.format_list_bulleted_rounded,
-          label: 'Watch List',
+          label: AppTexts.watchList,
           isSelected: selectedIndex == 0,
           onTap: () => onTabChanged(0),
         ),
         _TabItem(
           icon: Icons.folder_rounded,
-          label: 'History',
+          label: AppTexts.history,
           isSelected: selectedIndex == 1,
           onTap: () => onTabChanged(1),
         ),

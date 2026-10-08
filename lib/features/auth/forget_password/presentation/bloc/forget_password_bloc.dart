@@ -16,7 +16,7 @@ class ForgetPasswordBloc extends Bloc<ForgetPasswordEvents, ForgetPasswordStates
         return;
       }
 
-      final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+      final emailRegex = RegExp(r'^[\w.+-]+@[\w-]+(\.[\w-]+)*\.[a-zA-Z]{2,}$');
       if (!emailRegex.hasMatch(email)) {
         emit(ForgetPasswordFailure(message: 'Please enter a valid email address'));
         return;

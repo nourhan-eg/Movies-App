@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies/core/app_texts.dart';
 import 'package:movies/core/di/di.dart';
 import 'package:movies/core/widgets/movie_card.dart';
 
@@ -33,7 +34,7 @@ class GenreTab extends StatelessWidget {
             return Center(child: Text('Error: ${state.message}'));
           } else if (state is BrowseLoaded) {
             if (state.movies.isEmpty) {
-              return const Center(child: Text('No movies found'));
+              return const Center(child: Text(AppTexts.noMoviesFound));
             }
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),

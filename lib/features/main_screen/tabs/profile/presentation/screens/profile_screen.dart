@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies/core/app_texts.dart';
 import '../../../../../../core/app_colors.dart';
 import '../../../../../../core/app_routes.dart';
 import '../../../../../../core/widgets/app_avatars.dart';
@@ -108,7 +109,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           .read<ProfileBloc>()
                                           .add(LoadProfile());
                                     },
-                                    child: const Text('Retry'),
+                                    child: const Text(AppTexts.retry),
                                   ),
                                 ],
                               ),
@@ -180,7 +181,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               .read<WishlistBloc>()
                                               .add(LoadWishlist());
                                         },
-                                        child: const Text('Retry'),
+                                        child: const Text(AppTexts.retry),
                                       ),
                                     ],
                                   ),
@@ -226,7 +227,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               .read<HistoryBloc>()
                                               .add(LoadHistory());
                                         },
-                                        child: const Text('Retry'),
+                                        child: const Text(AppTexts.retry),
                                       ),
                                     ],
                                   ),

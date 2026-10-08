@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:movies/core/app_texts.dart';
 import '../../../../core/app_colors.dart';
 import '../../../../core/text_styles.dart';
 import '../../domain/entity/cast_entity.dart';
@@ -22,7 +23,7 @@ class MovieCastSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Cast',
+            AppTexts.cast,
             style: TextStyles.title2(AppColors.white).copyWith(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -72,7 +73,7 @@ class MovieCastSection extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Name : ${member.name}',
+                            '${AppTexts.name} : ${member.name}',
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyles.headingSmall(AppColors.white).copyWith(
@@ -81,7 +82,7 @@ class MovieCastSection extends StatelessWidget {
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            'Character : ${member.characterName}',
+                            '${AppTexts.character} : ${member.characterName}',
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyles.textSmall(Colors.white70).copyWith(

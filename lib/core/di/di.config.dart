@@ -213,6 +213,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i1048.ForgetPasswordRemoteDataSource>(
       () => _i901.ForgetPasswordRemoteDataSourceImpl(
         firebaseAuth: gh<_i59.FirebaseAuth>(),
+        firestore: gh<_i974.FirebaseFirestore>(),
       ),
     );
     gh.factory<_i172.MovieDetailsRemoteDataSource>(

@@ -1,3 +1,5 @@
+import 'package:movies/core/app_texts.dart';
+
 class Validators {
   static final RegExp _nameRegex = RegExp(r'^[\p{L} ]{2,}$', unicode: true);
 
@@ -15,50 +17,50 @@ class Validators {
 
   static String? name(String? value) {
     if (value == null || value.trim().isEmpty) {
-      return 'Please enter your name';
+      return AppTexts.valEnterName;
     }
     if (!_nameRegex.hasMatch(value.trim())) {
-      return 'Name must contain letters only (at least 2)';
+      return AppTexts.valNameLettersOnly;
     }
     return null;
   }
 
   static String? email(String? value) {
     if (value == null || value.trim().isEmpty) {
-      return 'Please enter your email';
+      return AppTexts.valEnterEmail;
     }
     if (!_emailRegex.hasMatch(value.trim())) {
-      return 'Invalid email';
+      return AppTexts.valInvalidEmail;
     }
     return null;
   }
 
   static String? password(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please enter your password';
+      return AppTexts.valEnterPassword;
     }
     if (!_passwordRegex.hasMatch(value)) {
-      return 'Password must be at least 8 characters with a letter and a number';
+      return AppTexts.valPasswordMinLength;
     }
     return null;
   }
 
   static String? confirmPassword(String? value, String password) {
     if (value == null || value.isEmpty) {
-      return 'Please confirm your password';
+      return AppTexts.valConfirmPassword;
     }
     if (value != password) {
-      return 'Passwords do not match';
+      return AppTexts.valPasswordsDoNotMatch;
     }
     return null;
   }
 
   static String? phone(String? value) {
     if (value == null || value.trim().isEmpty) {
-      return 'Please enter your phone number';
+      return AppTexts.valEnterPhone;
     }
     if (!_phoneRegex.hasMatch(value.trim())) {
-      return 'Invalid phone number';
+      return AppTexts.valInvalidPhone;
     }
     return null;
   }

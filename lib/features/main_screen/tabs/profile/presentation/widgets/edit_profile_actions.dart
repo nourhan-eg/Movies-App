@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies/core/app_colors.dart';
+import 'package:movies/core/app_texts.dart';
 import 'package:movies/core/widgets/custom_button.dart';
 
 class EditProfileActions extends StatelessWidget {
@@ -19,7 +20,7 @@ class EditProfileActions extends StatelessWidget {
     return Column(
       children: [
         CustomButton(
-          text: 'Delete Account',
+          text: AppTexts.deleteAccount,
           onPressed: isLoading ? () {} : onDelete,
           backgroundColor: AppColors.red,
           textColor: AppColors.white,
@@ -27,7 +28,7 @@ class EditProfileActions extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         CustomButton(
-          text: 'Update Data',
+          text: AppTexts.updateData,
           onPressed: isLoading ? () {} : onUpdate,
           backgroundColor: AppColors.yellow,
           textColor: AppColors.dark,

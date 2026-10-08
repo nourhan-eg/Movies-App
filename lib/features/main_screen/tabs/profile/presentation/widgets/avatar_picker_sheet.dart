@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies/core/app_colors.dart';
+import 'package:movies/core/app_texts.dart';
 import 'package:movies/core/text_styles.dart';
 import 'package:movies/core/widgets/app_avatars.dart';
 
@@ -40,7 +41,7 @@ class _AvatarPickerSheetState extends State<AvatarPickerSheet> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            'Choose Avatar',
+            AppTexts.chooseAvatar,
             style: TextStyles.headingSmall(AppColors.white),
           ),
           const SizedBox(height: 16),

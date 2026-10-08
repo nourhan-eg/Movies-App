@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/core/app_colors.dart';
 import 'package:movies/core/app_routes.dart';
+import 'package:movies/core/app_texts.dart';
 import 'package:movies/core/di/di.dart';
+import 'package:movies/core/widgets/custom_snack_bar.dart';
 import 'package:movies/core/widgets/app_avatars.dart';
 import 'package:movies/features/main_screen/tabs/profile/domain/entities/user_profile_entity.dart';
 import 'package:movies/features/main_screen/tabs/profile/presentation/bloc/edit_profile_bloc/edit_profile_bloc.dart';
@@ -85,25 +87,25 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       builder: (ctx) => AlertDialog(
         backgroundColor: AppColors.darkGrey,
         title: const Text(
-          'Delete Account',
+          AppTexts.deleteAccount,
           style: TextStyle(color: AppColors.white),
         ),
         content: const Text(
-          'This action is permanent and cannot be undone.',
+          AppTexts.deleteAccountConfirm,
           style: TextStyle(color: AppColors.white),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(false),
             child: const Text(
-              'Cancel',
+              AppTexts.cancel,
               style: TextStyle(color: AppColors.white),
             ),
           ),
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(true),
             child: const Text(
-              'Delete',
+              AppTexts.delete,
               style: TextStyle(color: AppColors.red),
             ),
           ),
@@ -121,12 +123,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       listener: (context, state) {
         if (state is EditProfileUpdateSuccess) {
           context.read<ProfileBloc>().add(LoadProfile());
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Profile updated'),
-              backgroundColor: AppColors.green,
-            ),
-          );
+          CustomSnackBar.showSuccess(context, AppTexts.profileUpdated);
           Navigator.of(context).pop();
         } else if (state is EditProfileDeleteSuccess) {
           Navigator.of(context).pushNamedAndRemoveUntil(
@@ -134,12 +131,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             (_) => false,
           );
         } else if (state is EditProfileError) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(state.message),
-              backgroundColor: AppColors.red,
-            ),
-          );
+          CustomSnackBar.showError(context, state.message);
         }
       },
       child: Scaffold(
@@ -153,7 +145,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           ),
           centerTitle: true,
           title: Text(
-            'Pick Avatar',
+            AppTexts.pickAvatar,
             style: Theme.of(context)
                 .textTheme
                 .titleMedium

@@ -4,8 +4,10 @@ import 'package:movies/core/app_colors.dart';
 import 'package:movies/core/app_icons.dart';
 import 'package:movies/core/app_images.dart';
 import 'package:movies/core/app_routes.dart';
+import 'package:movies/core/app_texts.dart';
 import 'package:movies/core/di/di.dart';
 import 'package:movies/core/widgets/custom_button.dart';
+import 'package:movies/core/widgets/custom_snack_bar.dart';
 import 'package:movies/core/widgets/custom_text_field.dart';
 import 'package:movies/features/auth/login/presentation/bloc/login_bloc.dart';
 import 'package:movies/features/auth/login/presentation/bloc/login_events.dart';
@@ -39,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     CustomTextField(
                       controller: _emailController,
                       prefixIcon: AppIcons.emailIcon,
-                      hintText: "Email",
+                      hintText: AppTexts.email,
                       obscureText: false,
                       keyboardType: TextInputType.emailAddress,
                     ),
@@ -47,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     CustomTextField(
                       controller: _passwordController,
                       prefixIcon: AppIcons.passwordIcon,
-                      hintText: "Password",
+                      hintText: AppTexts.password,
                       obscureText: true,
                       keyboardType: TextInputType.visiblePassword,
                       isPassword: true,
@@ -62,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 context, AppRoutes.forgetPassword);
                           },
                           child: Text(
-                            "Forget Your Password ?",
+                            AppTexts.forgetYourPassword,
                             style: Theme
                                 .of(context)
                                 .textTheme
@@ -76,15 +78,18 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     SizedBox(height: 22),
                     CustomButton(
-                      text: "Login",
-                      onPressed: () {
-                        context.read<LoginBloc>().add(
-                              LoginWithEmailRequested(
-                                email: _emailController.text.trim(),
-                                password: _passwordController.text,
-                              ),
-                            );
-                      },
+                      text: AppTexts.login,
+                      isLoading: state is LoginLoading,
+                      onPressed: state is LoginLoading
+                          ? () {}
+                          : () {
+                              context.read<LoginBloc>().add(
+                                    LoginWithEmailRequested(
+                                      email: _emailController.text.trim(),
+                                      password: _passwordController.text,
+                                    ),
+                                  );
+                            },
                       backgroundColor: AppColors.yellow,
                       textColor: AppColors.black,
                     ),
@@ -93,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       mainAxisAlignment: .center,
                       children: [
                         Text(
-                          "Don’t Have Account ? ",
+                          AppTexts.dontHaveAccount,
                           style: Theme
                               .of(
                             context,
@@ -107,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Navigator.pushNamed(context, AppRoutes.register);
                           },
                           child: Text(
-                            "Create One",
+                            AppTexts.createOne,
                             style: Theme
                                 .of(context)
                                 .textTheme
@@ -131,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 12),
                           child: Text(
-                            "OR",
+                            AppTexts.or,
                             style: Theme
                                 .of(context)
                                 .textTheme
@@ -150,7 +155,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     SizedBox(height: 28),
                     CustomButton(
-                      text: "Login With Google",
+                      text: AppTexts.loginWithGoogle,
                       onPressed: () {
                         context.read<LoginBloc>().add(LoginWithGoogleRequested());
                       },
@@ -164,14 +169,12 @@ class _LoginScreenState extends State<LoginScreen> {
             );
           },
           listener: (context, state) {
-          if (state is LoginSuccess) {
-            Navigator.pushReplacementNamed(context, AppRoutes.main);
-          } else if (state is LoginFailure) {
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(SnackBar(content: Text(state.message)));
-          }
-        },
+            if (state is LoginSuccess) {
+              Navigator.pushReplacementNamed(context, AppRoutes.main);
+            } else if (state is LoginFailure) {
+              CustomSnackBar.showError(context, state.message);
+            }
+          },
 
       ),
     );

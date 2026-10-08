@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/core/app_colors.dart';
+import 'package:movies/core/app_texts.dart';
 import 'package:movies/core/di/di.dart';
 import 'package:movies/core/validator.dart';
 import 'package:movies/core/widgets/app_avatars.dart';
@@ -10,6 +11,7 @@ import 'package:movies/features/auth/register/presentation/bloc/signup_states.da
 import '../../../../../core/app_icons.dart';
 import '../../../../../core/app_routes.dart';
 import '../../../../../core/widgets/custom_button.dart';
+import '../../../../../core/widgets/custom_snack_bar.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
 import '../bloc/signup_events.dart';
 import '../widgets/signup_avatar.dart';
@@ -50,7 +52,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               centerTitle: true,
               title: Text(
-                "Register",
+                AppTexts.register,
                 style: Theme.of(
                   context,
                 ).textTheme.titleMedium?.copyWith(color: AppColors.yellow),
@@ -71,7 +73,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     CustomTextField(
                       controller: _nameController,
                       prefixIcon: AppIcons.nameIcon,
-                      hintText: "Name",
+                      hintText: AppTexts.name,
                       obscureText: false,
                       keyboardType: TextInputType.name,
                       validator: Validators.name,
@@ -80,7 +82,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     CustomTextField(
                       controller: _emailController,
                       prefixIcon: AppIcons.emailIcon,
-                      hintText: "Email",
+                      hintText: AppTexts.email,
                       obscureText: false,
                       keyboardType: TextInputType.emailAddress,
                       validator: Validators.email,
@@ -89,7 +91,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     CustomTextField(
                       controller: _passwordController,
                       prefixIcon: AppIcons.passwordIcon,
-                      hintText: "password",
+                      hintText: AppTexts.password,
                       obscureText: true,
                       isPassword: true,
                       keyboardType: TextInputType.visiblePassword,
@@ -99,7 +101,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     CustomTextField(
                       controller: _confirmPasswordController,
                       prefixIcon: AppIcons.passwordIcon,
-                      hintText: "Confirm Password",
+                      hintText: AppTexts.confirmPassword,
                       isPassword: true,
                       obscureText: true,
                       keyboardType: TextInputType.visiblePassword,
@@ -109,28 +111,31 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     CustomTextField(
                       controller: _phoneController,
                       prefixIcon: AppIcons.phoneIcon,
-                      hintText: "Phone",
+                      hintText: AppTexts.phone,
                       obscureText: false,
                       keyboardType: TextInputType.phone,
                       validator: Validators.phone,
                     ),
                     SizedBox(height: 24),
                     CustomButton(
-                      text: "Create Account",
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          context.read<SignupBloc>().add(
-                            SignupRequested(
-                              name: _nameController.text.trim(),
-                              email: _emailController.text.trim(),
-                              phone: _phoneController.text.trim(),
-                              password: _passwordController.text,
-                              rePassword: _confirmPasswordController.text,
-                              avatar: _selectedAvatar,
-                            ),
-                          );
-                        }
-                      },
+                      text: AppTexts.createAccount,
+                      isLoading: state is SignupLoading,
+                      onPressed: state is SignupLoading
+                          ? () {}
+                          : () {
+                              if (_formKey.currentState!.validate()) {
+                                context.read<SignupBloc>().add(
+                                  SignupRequested(
+                                    name: _nameController.text.trim(),
+                                    email: _emailController.text.trim(),
+                                    phone: _phoneController.text.trim(),
+                                    password: _passwordController.text,
+                                    rePassword: _confirmPasswordController.text,
+                                    avatar: _selectedAvatar,
+                                  ),
+                                );
+                              }
+                            },
                       backgroundColor: AppColors.yellow,
                       textColor: AppColors.black,
                     ),
@@ -139,7 +144,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       mainAxisAlignment: .center,
                       children: [
                         Text(
-                          "Already Have Account ? ",
+                          AppTexts.alreadyHaveAccount,
                           style: Theme.of(context).textTheme.titleSmall
                               ?.copyWith(color: AppColors.white),
                         ),
@@ -148,7 +153,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             Navigator.pushNamed(context, AppRoutes.login);
                           },
                           child: Text(
-                            "Login",
+                            AppTexts.login,
                             style: Theme.of(context).textTheme.headlineSmall
                                 ?.copyWith(color: AppColors.yellow),
                           ),
@@ -165,9 +170,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           if (state is SignupSuccess) {
             Navigator.pushReplacementNamed(context, AppRoutes.login);
           } else if (state is SignupFailure) {
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(SnackBar(content: Text(state.message)));
+            CustomSnackBar.showError(context, state.message);
           }
         },
       ),

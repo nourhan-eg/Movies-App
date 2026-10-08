@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/core/app_colors.dart';
+import 'package:movies/core/app_images.dart';
+import 'package:movies/core/app_texts.dart';
 import 'package:movies/core/di/di.dart';
 import 'package:movies/core/widgets/custom_text_field.dart';
 import 'package:movies/features/main_screen/tabs/search/presentation/bloc/search_bloc.dart';
@@ -30,11 +32,10 @@ class _SearchTabState extends State<SearchTab> {
               padding: const EdgeInsets.all(16),
               child: Column(
                 children: [
-                  // text field
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     child: CustomTextField(
-                      hintText: 'Search',
+                      hintText: AppTexts.search,
                       prefixIcon: 'assets/icons/search.svg',
                       onChanged: (value) {
                         context.read<SearchBloc>().add(
@@ -63,7 +64,7 @@ class _SearchTabState extends State<SearchTab> {
                           if (state.movies.isEmpty) {
                             return const Center(
                               child: Text(
-                                'No results found',
+                                AppTexts.noResultsFound,
                                 style: TextStyle(color: Colors.white),
                               ),
                             );
@@ -72,7 +73,7 @@ class _SearchTabState extends State<SearchTab> {
                             padding: const EdgeInsets.symmetric(horizontal: 8.0),
                             child: GridView.builder(
                               itemCount: state.movies.length,
-                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2,
                                   crossAxisSpacing: 16,
                                   mainAxisSpacing: 16,
@@ -89,13 +90,16 @@ class _SearchTabState extends State<SearchTab> {
                         } else if (state is SearchErrorState) {
                           return const Center(
                             child: Text(
-                              'Something went wrong',
+                              AppTexts.somethingWentWrong,
                               style: TextStyle(color: Colors.white),
                             ),
                           );
                         }
-                        // initial state
-                        return const SizedBox();
+                        return Center(
+                          child: Image.asset(
+                            AppImages.popcorn,
+                          ),
+                        );
                       },
                     ),
                   ),

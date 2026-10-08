@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:movies/core/app_texts.dart';
 import '../../../../core/app_colors.dart';
 import '../../../../core/text_styles.dart';
 
@@ -186,7 +187,7 @@ class MovieDetailsHeader extends StatelessWidget {
                 elevation: 0,
               ),
               child: Text(
-                'Watch',
+                AppTexts.watch,
                 style: TextStyles.headingSmall(AppColors.white).copyWith(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
